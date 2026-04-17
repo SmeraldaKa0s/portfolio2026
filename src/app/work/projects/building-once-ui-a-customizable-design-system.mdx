@@ -1,7 +1,7 @@
 ---
-title: "Building Once UI, a Customizable Design System"
+title: "Múltiples bultos en Same-day"
 publishedAt: "2024-04-08"
-summary: "Development of a flexible and highly customizable design system using Next.js for front-end and Figma for design collaboration."
+summary: "Caso de estudio: diseño de la operación multi-bulto para el servicio Same-day de Mercado Pago dentro del ecosistema logístico Pickit."
 images:
   - "/images/projects/project-01/cover-01.jpg"
   - "/images/projects/project-01/cover-02.jpg"
@@ -18,28 +18,80 @@ team:
     linkedIn: "https://www.linkedin.com/company/once-ui/"
 ---
 
-## Overview
+## Caso de estudio: múltiples bultos en Same-day
 
-Development of a flexible and highly customizable design system using Next.js for front-end and Figma for design collaboration.
+**Rol:** Product Designer / PM
+**Cliente:** Mercado Pago
+**Plataforma:** Pickit (ecosistema de logística de última milla)
 
-## Key Features
+## Métricas proyectadas (MVP)
 
-- **Component Library**: Built a set of modular, reusable UI components using React and styled-components in Next.js, focusing on accessibility and responsiveness.
-- **Theming and Customization**: Integrated a theming system that allows easy switching and customization of color palettes, typography, and layout styles using CSS variables and Figma tokens.
-- **Figma Integration**: Collaborated closely with designers by setting up a shared design library in Figma. This library was synchronized with the codebase, ensuring design handoffs were seamless and that design tokens remained consistent across both platforms.
-- **Documentation and Usage Guidelines**: Developed comprehensive documentation with Storybook to showcase components, usage patterns, and best practices, ensuring the design system is easy to adopt by other teams.
+- **SLA contractual:** Efectividad de Entrega de pedidos multi-bulto, medida contra el ASAP de 4 horas del servicio Same-day.
+- **Reducción de carga en CX y Atención Operativa** por mejoras en claridad de interfaz y bloqueo de despachos incompletos. Menos pantallas congeladas, menos despachos a medias, menos escalaciones.
+- **Volumen estimado MVP:** 500 transacciones/mes.
+- **Facturación estimada MVP:** USD 4.000/mes (cifra de arranque, no techo del servicio).
+- Filtro multi-bulto sumado al tablero Power BI de Same-day para seguimiento operativo.
 
-## Technologies Used
+## El problema
 
-- **Next.js**: For fast, server-rendered React applications.
-- **Figma**: For creating and managing design assets and prototypes.
-- **Styled-Components**: For styling React components with a modular, themable approach.
-- **Storybook**: For building an interactive, documented component library.
+Pickit no podía operar transacciones Same-day con más de un bulto. La limitación bloqueaba cinco procesos: etiquetado, despacho, entrega, devolución e ingreso de ítems.
 
-## Challenges and Learnings
+Para Mercado Pago, esto significaba que una vertical entera de sellers con catálogo de points no podía usar Same-day. El servicio estaba diseñado para transacciones de 1 ítem = 1 bulto = 1 serial, y ese supuesto se rompía apenas una transacción tenía varios ítems de un mismo SKU. Era la última pieza del servicio Same-day que faltaba habilitar.
 
-One key challenge was balancing the need for flexibility with the desire to maintain design consistency. The solution involved creating well-defined design tokens and establishing clear guidelines for when and how components could be customized. Additionally, setting up effective collaboration workflows between designers and developers using Figma and Git was a learning experience that greatly improved the process.
+**Fricción concreta en los aplicativos:**
 
-## Outcome
+- La Web Puntos congelaba la pantalla al despachar pedidos multi-bulto.
+- Se imprimía una sola etiqueta por transacción, aunque hubiera varios bultos físicos. El layout no tenía cómo mostrar "bulto 1 de 3".
+- La app de pickers no sabía cómo colectar ni entregar varios bultos asociados al mismo serial de transacción.
 
-The design system is now actively used across multiple projects, leading to faster development cycles, fewer design inconsistencies, and improved collaboration between design and development teams. It has become a foundation for scaling our products efficiently while ensuring a cohesive user experience.
+*[Matriz de actores × aplicativos afectados]*
+Acá va la matriz que armamos. Muestra cómo cada perfil interactúa con cada aplicativo del ecosistema Pickit, y deja en claro dónde se concentró el trabajo de diseño.
+
+## Cómo lo abordé
+
+Mapeé el flujo completo antes de tocar nada. Documenté imposición → etiquetado → despacho → colecta → entrega → devolución, marcando cada punto donde el sistema asumía que una transacción equivalía a un bulto. Separé lo que era lógica de backend (validaciones de imposición) de lo que era experiencia en los aplicativos.
+
+**Acoté el alcance con reglas duras.** Con Comercial y Desarrollo cerramos tres restricciones para el R1:
+
+1. 1 SKU por transacción
+2. Todos los ítems serializados, categoría points
+3. Máximo 10 ítems
+
+Además, R1 no habilita entrega parcial. Todo o nada. Si la entrega no se completa, es un Imposible de Entrega que pasa a Atención Operativa y se reprograma. Esta decisión simplificó mucho el diseño porque eliminó los flujos de "qué pasa si el picker solo lleva 2 de 3 bultos". Ese problema queda para un R2.
+
+**Trabajé los criterios de aceptación con desarrollo.** Cada regla quedó trazable con su endpoint y microservicio correspondiente, lo que permitió que QA y dev trabajen en paralelo y que el handoff no dependiera de reuniones de aclaración.
+
+**Ideación con cuatro perfiles de usuario más el equipo de desarrollo de Pickit:** Seller, Operador de Punto, Picker, Colaborador Interno de CX, y los programadores que iban a implementar los cambios. Meter a developers en la etapa de ideación fue clave: varias soluciones que parecían limpias desde UX tenían costos técnicos altos, y otras que parecían complicadas eran triviales de implementar. De esa instancia salió, por ejemplo, tratar a las transacciones multi-bulto como transacciones PRO para reusar el flujo de priorización del ruteador en vez de construir uno nuevo.
+
+## Diseño de aplicativos
+
+### Pickers app
+
+La decisión de base fue tratar a las transacciones multi-bulto como transacciones PRO, para entrar en el flujo de priorización existente del algoritmo de ruteo. Sobre eso, adapté la interfaz para que el mismo picker pueda colectar y entregar varios bultos asociados a un solo serial.
+
+**Cambios puntuales:**
+
+- **Nueva variante del componente Tag en el design system.** Incorporé al sistema una variante promocional del Tag, pensada para distinguir transacciones de tratamiento preferente dentro del listado de viajes. A diferencia de los tags funcionales (estado, categoría), este opera sobre la percepción del picker y compite por su atención en la lista. El trabajo incluyó un ícono nuevo que aporta refuerzo visual al label y un token de color incorporado a la paleta, que sostiene la jerarquía sin pisar las convenciones ya ocupadas por success, warning, info y danger. Tag, ícono y color funcionan como un sistema coordinado: cada uno cubre un nivel distinto de lectura (forma, figura, color) y su valor aparece en el conjunto, no en cada pieza por separado.
+- **Información mínima visible al ofrecer el viaje:** cantidad de paradas y cantidad total de bultos.
+- **Pantalla de colecta** que muestra el total de bultos a retirar del punto contra lo que efectivamente carga el picker.
+- **Pantalla de entrega** que obliga a completar los N bultos. Sin entrega parcial, sin excepciones en R1.
+
+### Web Puntos
+
+Rediseñé dos momentos críticos:
+
+- **Etiqueta.** Agregué un contador "bulto X de Y" visible en cada impresión. Cambio chico de layout, impacto directo en la operación: el operador deja de depender de la pantalla para saber si imprimió todo, la información vive en el papel que tiene en la mano.
+- **Flujo de despacho.** El botón de confirmar queda deshabilitado hasta que el operador escanea los seriales completos de la transacción. Esto resuelve la pantalla congelada del problema original y previene despachos incompletos que después se convertirían en tickets de CX.
+
+## Qué dejé afuera del R1 y por qué
+
+- **Entrega parcial.** Abre una cadena de decisiones (qué se factura, qué vuelve, cómo se reprograma lo faltante) que no podíamos resolver a tiempo para este release.
+- **Ítems no serializados.** R1 exige serialización completa para trackear cada bulto. Soportar ítems sin serial duplica las validaciones.
+- **Más de 1 SKU por transacción.** Simplifica el ruteo, el etiquetado y la conciliación con Mercado Pago.
+- **Restricciones volumétricas en el ruteador para estos viajes.** Como cada viaje multi-bulto lleva una sola transacción a un solo destino, no necesitamos recalcular volumen.
+
+## Lo que me llevo
+
+Entré queriendo diseñar una plataforma genérica. Salí convencido de que las restricciones, bien negociadas, son una herramienta de diseño. Si hubiera insistido en soportar entrega parcial, múltiples SKUs o ítems no serializados desde la v1, probablemente seguiríamos en discovery. La versión acotada sale, se mide contra el SLA, y recién ahí decidimos qué sumar al R2.
+
+La otra cosa: el caso real del diseño fue la interfaz de pickers, no el proceso. Un operador en la calle, con el teléfono en una mano y una caja en la otra, no necesita más información, necesita menos fricción. Todo el rediseño de colecta y entrega se pensó desde ahí.
