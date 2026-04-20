@@ -3,7 +3,6 @@
 import {
   Carousel,
   Column,
-  Flex,
   Heading,
   Text,
 } from "@once-ui-system/core";
@@ -45,8 +44,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           alt: title,
         }))}
       />
-      <Flex
-        s={{ direction: "column" }}
+      <Column
         fillWidth
         paddingX="s"
         paddingTop="8"
@@ -63,7 +61,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             {description}
           </Text>
         )}
-      </Flex>
+      </Column>
     </Column>
   );
 };

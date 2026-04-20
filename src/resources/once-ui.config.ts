@@ -4,7 +4,6 @@ import {
   EffectsConfig,
   FontsConfig,
   MailchimpConfig,
-  ProtectedRoutesConfig,
   RoutesConfig,
   SameAsConfig,
   SchemaConfig,
@@ -28,12 +27,6 @@ const display: DisplayConfig = {
   location: true,
   time: false,
   themeSwitcher: true,
-};
-
-// Enable password protection on selected routes
-// Set password in the .env file, refer to .env.example
-const protectedRoutes: ProtectedRoutesConfig = {
-  "/work/automate-design-handovers-with-a-figma-to-code-pipeline": true,
 };
 
 // Import and set font for each variant
@@ -220,7 +213,6 @@ export {
   display,
   mailchimp,
   routes,
-  protectedRoutes,
   baseURL,
   fonts,
   style,
