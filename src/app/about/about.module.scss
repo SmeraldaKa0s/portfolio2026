@@ -1,0 +1,38 @@
+.storyLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--neutral-on-background-strong);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:hover .arrowCircle {
+    border-color: var(--neutral-on-background-strong);
+  }
+
+  &:hover .arrowIcon {
+    transform: translateX(12px) rotate(-90deg);
+  }
+}
+
+.arrowCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--neutral-border-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.arrowIcon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

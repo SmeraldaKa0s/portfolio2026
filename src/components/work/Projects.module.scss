@@ -1,17 +1,18 @@
-.hover {
-    transition: var(--transition-micro-medium);
+@use "../breakpoints.scss" as breakpoints;
 
-    &:hover {
-        transform: translateX(var(--static-space-8));
-
-        .indicator {
-            transform: rotate(0);
-        }
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--static-space-24);
+  width: 100%;
 }
 
-.indicator {
-    transform: rotate(-90deg);
-    left: -2rem;
-    transition: var(--transition-micro-medium);
+@media (max-width: breakpoints.$s) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gridItem {
+  width: 100%;
 }

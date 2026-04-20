@@ -1,0 +1,23 @@
+.articleLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 2rem 0;
+  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    padding-left: 1rem;
+  }
+
+  &:hover .arrowContainer {
+    opacity: 1;
+    transform: translate(4px, -4px);
+  }
+}
+
+.arrowContainer {
+  opacity: 0.3;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  padding-top: 1rem;
+}

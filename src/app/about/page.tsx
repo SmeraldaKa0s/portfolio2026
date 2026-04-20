@@ -1,21 +1,24 @@
 import {
-  Avatar,
-  Button,
   Column,
   Heading,
-  Icon,
-  IconButton,
-  Media,
-  Tag,
   Text,
   Meta,
   Schema,
   Row,
+  Line,
+  Media,
+  Icon,
 } from "@once-ui-system/core";
-import { baseURL, about, person, social } from "@/resources";
-import TableOfContents from "@/components/about/TableOfContents";
-import styles from "@/components/about/about.module.scss";
+import { Playfair_Display } from "next/font/google";
+import { baseURL, about, person } from "@/resources";
 import React from "react";
+import styles from "./about.module.scss";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -28,30 +31,8 @@ export async function generateMetadata() {
 }
 
 export default function About() {
-  const structure = [
-    {
-      title: about.intro.title,
-      display: about.intro.display,
-      items: [],
-    },
-    {
-      title: about.work.title,
-      display: about.work.display,
-      items: about.work.experiences.map((experience) => experience.company),
-    },
-    {
-      title: about.studies.title,
-      display: about.studies.display,
-      items: about.studies.institutions.map((institution) => institution.name),
-    },
-    {
-      title: about.technical.title,
-      display: about.technical.display,
-      items: about.technical.skills.map((skill) => skill.title),
-    },
-  ];
   return (
-    <Column maxWidth="m">
+    <Column maxWidth="m" fillWidth>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -65,169 +46,182 @@ export default function About() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      {about.tableOfContent.display && (
+
+      {/* ——— Section 1: Intro with text left + avatar right ——— */}
+      <Row
+        fillWidth
+        gap="xl"
+        paddingY="xl"
+        s={{ direction: "column" }}
+        style={{ minHeight: "85vh", alignItems: "stretch" }}
+      >
+        {/* Left: intro text + CTA — vertically centered */}
         <Column
-          left="0"
-          style={{ top: "50%", transform: "translateY(-50%)" }}
-          position="fixed"
-          paddingLeft="24"
-          gap="32"
-          s={{ hide: true }}
+          flex={5}
+          gap="xl"
+          vertical="center"
+          style={{ justifyContent: "center" }}
         >
-          <TableOfContents structure={structure} about={about} />
+          <Text
+            variant="heading-default-l"
+            onBackground="neutral-weak"
+            className={playfair.className}
+            style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.5 }}
+          >
+            {about.intro.description}
+          </Text>
+          <a
+            href="#story"
+            className={styles.storyLink}
+          >
+            <span className={styles.arrowCircle}>
+              <Icon name="arrowDown" size="m" className={styles.arrowIcon} />
+            </span>
+            This is my story
+          </a>
         </Column>
-      )}
-      <Row fillWidth s={{ direction: "column"}} horizontal="center">
+
+        {/* Right: avatar image — fixed size */}
         {about.avatar.display && (
           <Column
-            className={styles.avatar}
-            top="64"
-            fitHeight
-            position="sticky"
-            s={{ position: "relative", style: { top: "auto" } }}
-            xs={{ style: { top: "auto" } }}
-            minWidth="160"
-            paddingX="l"
-            paddingBottom="xl"
-            gap="m"
-            flex={3}
-            horizontal="center"
+            flex={5}
+            horizontal="end"
+            vertical="center"
           >
-            <Avatar src={person.avatar} size="xl" />
-            <Row gap="8" vertical="center">
-              <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
-            </Row>
-            {person.languages && person.languages.length > 0 && (
-              <Row wrap gap="8">
-                {person.languages.map((language, index) => (
-                  <Tag key={index} size="l">
-                    {language}
-                  </Tag>
-                ))}
-              </Row>
-            )}
+            <div style={{ width: 590, maxWidth: "100%", height: 665, position: "relative" }}>
+              <Media
+                radius="l"
+                alt={person.name}
+                src={person.avatar}
+                sizes="590px"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
           </Column>
         )}
-        <Column className={styles.blockAlign} flex={9} maxWidth={40}>
-          <Column
-            id={about.intro.title}
-            fillWidth
-            minHeight="160"
-            vertical="center"
-            marginBottom="32"
-          >
-            {about.calendar.display && (
-              <Row
-                fitWidth
-                border="brand-alpha-medium"
-                background="brand-alpha-weak"
-                radius="full"
-                padding="4"
-                gap="8"
-                marginBottom="m"
-                vertical="center"
-                className={styles.blockAlign}
+      </Row>
+
+      {/* ——— Section 2: Story text shifted right ——— */}
+      {about.intro.display && (
+        <Column fillWidth paddingY="xl" id="story">
+          <Row fillWidth gap="xl" s={{ direction: "column" }}>
+            <Column flex={4} s={{ hide: true }} />
+            <Column flex={6} gap="xl">
+              <Column gap="m">
+                <Text
+                  variant="display-default-xs"
+                  onBackground="neutral-weak"
+                  className={playfair.className}
+                  style={{ fontStyle: "italic" }}
+                >
+                  tldr:
+                </Text>
+                <Heading
+                  as="h2"
+                  variant="display-strong-l"
+                  className={playfair.className}
+                >
+                  Passion brought me here
+                </Heading>
+              </Column>
+
+              <Column gap="l">
+                <Text onBackground="neutral-weak" variant="body-default-l">
+                  {about.intro.description}
+                </Text>
+                <Text onBackground="neutral-weak" variant="body-default-l">
+                  Computers and internet are two words that have shaped me since I was seven.
+                  When I was a little kid, I used to visit my father&apos;s office during weekends
+                  whenever he had extra work to do. I have wonderful memories of us spending time
+                  together while using his computer to explore a magical place called the World Wide Web.
+                </Text>
+                <Text onBackground="neutral-weak" variant="body-default-l">
+                  By the age of thirteen, I realized I could also be part of the movement that were
+                  shaping this new world. I made my first steps building my own websites, and later
+                  for others.
+                </Text>
+                <Text onBackground="neutral-weak" variant="body-default-l">
+                  After having my bachelor&apos;s degree in Advertising I received an offer to join a
+                  fast-growing startup for a position I didn&apos;t hear before: UX/UI Design. Since then
+                  I have never looked back, and I have been devoted to crafting meaningful digital
+                  experiences ever since.
+                </Text>
+              </Column>
+            </Column>
+          </Row>
+        </Column>
+      )}
+
+      {/* ——— Section 3: Experience — sticky title ——— */}
+      {about.work.display && (
+        <Column fillWidth paddingY="xl">
+          <Line marginBottom="xl" />
+
+          <Row fillWidth gap="xl" s={{ direction: "column" }}>
+            {/* Col 1: Sticky "Experience" title */}
+            <Column
+              flex={3}
+              style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+              s={{ style: { position: "relative", top: "auto" } }}
+            >
+              <Text
+                className={playfair.className}
                 style={{
-                  backdropFilter: "blur(var(--static-space-1))",
+                  fontSize: "34px",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  lineHeight: 1.2,
                 }}
               >
-                <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
-                <IconButton
-                  href={about.calendar.link}
-                  data-border="rounded"
-                  variant="secondary"
-                  icon="chevronRight"
-                />
-              </Row>
-            )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
-              {person.name}
-            </Heading>
-            <Text
-              className={styles.textAlign}
-              variant="display-default-xs"
-              onBackground="neutral-weak"
-            >
-              {person.role}
-            </Text>
-            {social.length > 0 && (
-              <Row
-                className={styles.blockAlign}
-                paddingTop="20"
-                paddingBottom="8"
-                gap="8"
-                wrap
-                horizontal="center"
-                fitWidth
-                data-border="rounded"
-              >
-                {social
-                      .filter((item) => item.essential)
-                      .map(
-                  (item) =>
-                    item.link && (
-                      <React.Fragment key={item.name}>
-                        <Row s={{ hide: true }}>
-                          <Button
-                            key={item.name}
-                            href={item.link}
-                            prefixIcon={item.icon}
-                            label={item.name}
-                            size="s"
-                            weight="default"
-                            variant="secondary"
-                          />
-                        </Row>
-                        <Row hide s={{ hide: false }}>
-                          <IconButton
-                            size="l"
-                            key={`${item.name}-icon`}
-                            href={item.link}
-                            icon={item.icon}
-                            variant="secondary"
-                          />
-                        </Row>
-                      </React.Fragment>
-                    ),
-                )}
-              </Row>
-            )}
-          </Column>
-
-          {about.intro.display && (
-            <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
-              {about.intro.description}
+                Experience
+              </Text>
             </Column>
-          )}
 
-          {about.work.display && (
-            <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
-                {about.work.title}
-              </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.work.experiences.map((experience, index) => (
-                  <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
-                    <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                      <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
-                      </Text>
-                      <Text variant="heading-default-xs" onBackground="neutral-weak">
-                        {experience.timeframe}
-                      </Text>
-                    </Row>
-                    <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
+            {/* Entries */}
+            <Column flex={7} gap="48">
+              {about.work.experiences.map((experience, index) => (
+                <Row
+                  key={`${experience.company}-${experience.role}-${index}`}
+                  fillWidth
+                  gap="xl"
+                  s={{ direction: "column" }}
+                >
+                  {/* Timeframe */}
+                  <Column flex={3} gap="4">
+                    <Text
+                      onBackground="neutral-weak"
+                      style={{ fontSize: "21px", lineHeight: 1.4 }}
+                    >
+                      {experience.timeframe}
+                    </Text>
+                  </Column>
+
+                  {/* Role + Company + Description */}
+                  <Column flex={5} gap="8">
+                    <Text
+                      variant="heading-strong-l"
+                      style={{ fontSize: "21px", lineHeight: 1.4 }}
+                    >
                       {experience.role}
                     </Text>
-                    <Column as="ul" gap="16">
+                    <Text
+                      onBackground="neutral-weak"
+                      style={{ fontSize: "16px", lineHeight: 1.4 }}
+                    >
+                      {experience.company}
+                    </Text>
+                    <Column as="ul" gap="8" paddingTop="8">
                       {experience.achievements.map(
-                        (achievement: React.ReactNode, index: number) => (
+                        (achievement: React.ReactNode, i: number) => (
                           <Text
                             as="li"
-                            variant="body-default-m"
-                            key={`${experience.company}-${index}`}
+                            onBackground="neutral-weak"
+                            key={`${experience.company}-${i}`}
+                            style={{ fontSize: "16px", lineHeight: 1.6 }}
                           >
                             {achievement}
                           </Text>
@@ -235,10 +229,10 @@ export default function About() {
                       )}
                     </Column>
                     {experience.images && experience.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image, index) => (
+                      <Row fillWidth paddingTop="m" gap="12" wrap>
+                        {experience.images.map((image, i) => (
                           <Row
-                            key={index}
+                            key={i}
                             border="neutral-medium"
                             radius="m"
                             minWidth={image.width}
@@ -256,64 +250,112 @@ export default function About() {
                       </Row>
                     )}
                   </Column>
-                ))}
-              </Column>
-            </>
-          )}
+                </Row>
+              ))}
+            </Column>
+          </Row>
+        </Column>
+      )}
 
-          {about.studies.display && (
-            <>
-              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
-                {about.studies.title}
-              </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.studies.institutions.map((institution, index) => (
-                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-l">
+      {/* ——— Education — sticky title ——— */}
+      {about.studies.display && (
+        <Column fillWidth paddingY="xl">
+          <Line marginBottom="xl" />
+
+          <Row fillWidth gap="xl" s={{ direction: "column" }}>
+            <Column
+              flex={3}
+              style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+              s={{ style: { position: "relative", top: "auto" } }}
+            >
+              <Text
+                className={playfair.className}
+                style={{
+                  fontSize: "34px",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  lineHeight: 1.2,
+                }}
+              >
+                Education
+              </Text>
+            </Column>
+
+            <Column flex={7} gap="48">
+              {about.studies.institutions.map((institution, index) => (
+                <Row
+                  key={`${institution.name}-${index}`}
+                  fillWidth
+                  gap="xl"
+                  s={{ direction: "column" }}
+                >
+                  <Column flex={3} />
+                  <Column flex={5} gap="4">
+                    <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
                       {institution.name}
                     </Text>
-                    <Text variant="heading-default-xs" onBackground="neutral-weak">
+                    <Text
+                      onBackground="neutral-weak"
+                      style={{ fontSize: "16px", lineHeight: 1.6 }}
+                    >
                       {institution.description}
                     </Text>
                   </Column>
-                ))}
-              </Column>
-            </>
-          )}
+                </Row>
+              ))}
+            </Column>
+          </Row>
+        </Column>
+      )}
 
-          {about.technical.display && (
-            <>
-              <Heading
-                as="h2"
-                id={about.technical.title}
-                variant="display-strong-s"
-                marginBottom="40"
+      {/* ——— Technical skills — sticky title ——— */}
+      {about.technical.display && (
+        <Column fillWidth paddingY="xl">
+          <Line marginBottom="xl" />
+
+          <Row fillWidth gap="xl" s={{ direction: "column" }}>
+            <Column
+              flex={3}
+              style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+              s={{ style: { position: "relative", top: "auto" } }}
+            >
+              <Text
+                className={playfair.className}
+                style={{
+                  fontSize: "34px",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  lineHeight: 1.2,
+                }}
               >
-                {about.technical.title}
-              </Heading>
-              <Column fillWidth gap="l">
-                {about.technical.skills.map((skill, index) => (
-                  <Column key={`${skill}-${index}`} fillWidth gap="4">
-                    <Text id={skill.title} variant="heading-strong-l">
+                Technical skills
+              </Text>
+            </Column>
+
+            <Column flex={7} gap="48">
+              {about.technical.skills.map((skill, index) => (
+                <Row
+                  key={`${skill.title}-${index}`}
+                  fillWidth
+                  gap="xl"
+                  s={{ direction: "column" }}
+                >
+                  <Column flex={3} />
+                  <Column flex={5} gap="8">
+                    <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
                       {skill.title}
                     </Text>
-                    <Text variant="body-default-m" onBackground="neutral-weak">
+                    <Text
+                      onBackground="neutral-weak"
+                      style={{ fontSize: "16px", lineHeight: 1.6 }}
+                    >
                       {skill.description}
                     </Text>
-                    {skill.tags && skill.tags.length > 0 && (
-                      <Row wrap gap="8" paddingTop="8">
-                        {skill.tags.map((tag, tagIndex) => (
-                          <Tag key={`${skill.title}-${tagIndex}`} size="l" prefixIcon={tag.icon}>
-                            {tag.name}
-                          </Tag>
-                        ))}
-                      </Row>
-                    )}
                     {skill.images && skill.images.length > 0 && (
                       <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
+                        {skill.images.map((image, i) => (
                           <Row
-                            key={index}
+                            key={i}
                             border="neutral-medium"
                             radius="m"
                             minWidth={image.width}
@@ -331,12 +373,12 @@ export default function About() {
                       </Row>
                     )}
                   </Column>
-                ))}
-              </Column>
-            </>
-          )}
+                </Row>
+              ))}
+            </Column>
+          </Row>
         </Column>
-      </Row>
+      )}
     </Column>
   );
 }
