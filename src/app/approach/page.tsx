@@ -1,9 +1,5 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import { Playfair_Display } from "next/font/google";
-import { Column, Row, Text, Line, Icon, RevealFx } from "@once-ui-system/core";
-import styles from "./approach.module.scss";
+import { Column, Row, Text, Line, RevealFx, SmartLink } from "@once-ui-system/core";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -77,37 +73,6 @@ const articles: Article[] = [
   },
 ];
 
-function ScrollReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(24px)",
-        transition: `opacity 0.6s cubic-bezier(0.4,0,0.2,1) ${delay}s, transform 0.6s cubic-bezier(0.4,0,0.2,1) ${delay}s`,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
 export default function Approach() {
   return (
     <Column maxWidth="m" fillWidth paddingY="xl">
@@ -160,58 +125,48 @@ export default function Approach() {
       {/* Articles list */}
       <Column fillWidth paddingTop="xl" gap="0">
         {articles.map((article, index) => (
-          <ScrollReveal key={article.title} delay={index * 0.06}>
-            <a
-              href={article.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.articleLink}
-            >
-              <Row fillWidth horizontal="between" vertical="start" gap="l">
-                <Column flex={1} gap="12">
-                  <Row gap="12" vertical="center">
-                    <Text
-                      variant="label-default-s"
-                      onBackground="neutral-weak"
-                      style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}
-                    >
-                      {article.category}
-                    </Text>
-                    <Text variant="label-default-s" onBackground="neutral-weak">
-                      ·
-                    </Text>
-                    <Text variant="label-default-s" onBackground="neutral-weak">
-                      {article.date}
-                    </Text>
-                  </Row>
-                  <Text
-                    variant="heading-strong-l"
-                    style={{ fontSize: "21px", lineHeight: 1.3 }}
-                  >
-                    {article.title}
-                  </Text>
-                  <Text
-                    variant="body-default-m"
-                    onBackground="neutral-weak"
-                    style={{ fontSize: "16px", lineHeight: 1.6 }}
-                  >
-                    {article.excerpt}
-                  </Text>
+          <RevealFx key={article.title} translateY="8" delay={0.05 * index}>
+            <SmartLink href={article.url} style={{ textDecoration: "none", color: "inherit" }}>
+              <Column fillWidth paddingY="l" gap="12">
+                <Row gap="12" vertical="center">
                   <Text
                     variant="label-default-s"
                     onBackground="neutral-weak"
-                    style={{ fontStyle: "italic" }}
+                    style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}
                   >
-                    {article.source}
+                    {article.category}
                   </Text>
-                </Column>
-                <div className={styles.arrowContainer}>
-                  <Icon name="arrowUpRight" size="m" />
-                </div>
-              </Row>
-            </a>
+                  <Text variant="label-default-s" onBackground="neutral-weak">
+                    ·
+                  </Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak">
+                    {article.date}
+                  </Text>
+                </Row>
+                <Text
+                  variant="heading-strong-l"
+                  style={{ fontSize: "21px", lineHeight: 1.3 }}
+                >
+                  {article.title}
+                </Text>
+                <Text
+                  variant="body-default-m"
+                  onBackground="neutral-weak"
+                  style={{ fontSize: "16px", lineHeight: 1.6 }}
+                >
+                  {article.excerpt}
+                </Text>
+                <Text
+                  variant="label-default-s"
+                  onBackground="neutral-weak"
+                  style={{ fontStyle: "italic" }}
+                >
+                  {article.source}
+                </Text>
+              </Column>
+            </SmartLink>
             <Line />
-          </ScrollReveal>
+          </RevealFx>
         ))}
       </Column>
     </Column>

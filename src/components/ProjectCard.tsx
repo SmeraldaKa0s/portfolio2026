@@ -3,7 +3,6 @@
 import {
   Carousel,
   Column,
-  Flex,
   Heading,
   Text,
 } from "@once-ui-system/core";
@@ -25,7 +24,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
   images = [],
   title,
-  content,
   description,
 }) => {
   const router = useRouter();
@@ -33,7 +31,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <Column
       fillWidth
-      gap="m"
+      gap="12"
       className={styles.card}
       onClick={() => router.push(href)}
       style={{ cursor: "pointer" }}
@@ -45,25 +43,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           alt: title,
         }))}
       />
-      <Flex
-        s={{ direction: "column" }}
-        fillWidth
-        paddingX="s"
-        paddingTop="8"
-        paddingBottom="16"
-        gap="8"
-      >
+      <Column fillWidth paddingX="4" paddingTop="4" paddingBottom="8" gap="4">
         {title && (
-          <Heading as="h2" wrap="balance" variant="heading-strong-l">
+          <Heading as="h2" wrap="balance" variant="heading-strong-m">
             {title}
           </Heading>
         )}
         {description?.trim() && (
-          <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
+          <Text wrap="balance" variant="body-default-xs" onBackground="neutral-weak">
             {description}
           </Text>
         )}
-      </Flex>
+      </Column>
     </Column>
   );
 };
