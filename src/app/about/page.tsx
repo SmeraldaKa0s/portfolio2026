@@ -164,7 +164,7 @@ export default function About() {
             {/* Col 1: Sticky "Experience" title */}
             <Column
               flex={3}
-              style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+              style={{ position: "sticky", top: 100, alignSelf: "flex-start", marginTop: "-10px" }}
               s={{ style: { position: "relative", top: "auto" } }}
             >
               <Text
@@ -264,7 +264,7 @@ export default function About() {
           <Row fillWidth gap="xl" s={{ direction: "column" }}>
             <Column
               flex={3}
-              style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+              style={{ position: "sticky", top: 100, alignSelf: "flex-start", marginTop: "-10px" }}
               s={{ style: { position: "relative", top: "auto" } }}
             >
               <Text
@@ -315,7 +315,7 @@ export default function About() {
           <Row fillWidth gap="xl" s={{ direction: "column" }}>
             <Column
               flex={3}
-              style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+              style={{ position: "sticky", top: 100, alignSelf: "flex-start", marginTop: "-10px" }}
               s={{ style: { position: "relative", top: "auto" } }}
             >
               <Text
