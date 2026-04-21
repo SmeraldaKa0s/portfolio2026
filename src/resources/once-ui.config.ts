@@ -30,29 +30,28 @@ const display: DisplayConfig = {
   themeSwitcher: true,
 };
 
-// Import and set font for each variant
-import { Geist } from "next/font/google";
-import { Geist_Mono } from "next/font/google";
+import { Source_Serif_4, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 
-const heading = Geist({
+const heading = Source_Serif_4({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  axes: ["opsz"],
 });
 
-const body = Geist({
+const body = Hanken_Grotesk({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
 
-const label = Geist({
+const label = Hanken_Grotesk({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
 });
 
-const code = Geist_Mono({
+const code = JetBrains_Mono({
   variable: "--font-code",
   subsets: ["latin"],
   display: "swap",
@@ -68,13 +67,13 @@ const fonts: FontsConfig = {
 // default customization applied to the HTML in the main layout.tsx
 const style: StyleConfig = {
   theme: "system", // dark | light | system
-  neutral: "gray", // sand | gray | slate | mint | rose | dusk | custom
-  brand: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
-  accent: "red", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
+  neutral: "custom", // sand | gray | slate | mint | rose | dusk | custom
+  brand: "custom", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
+  accent: "custom", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
-  border: "playful", // rounded | playful | conservative | sharp
-  surface: "translucent", // filled | translucent
+  border: "conservative", // rounded | playful | conservative | sharp
+  surface: "filled", // filled | translucent
   transition: "all", // all | micro | macro
   scaling: "100", // 90 | 95 | 100 | 105 | 110
 };
@@ -101,19 +100,19 @@ const effects: EffectsConfig = {
     radius: 100,
   },
   gradient: {
-    display: false,
-    opacity: 100,
-    x: 50,
-    y: 60,
-    width: 100,
-    height: 50,
-    tilt: 0,
-    colorStart: "accent-background-strong",
-    colorEnd: "page-background",
+    display: true,
+    opacity: 60,
+    x: 95,
+    y: 0,
+    width: 70,
+    height: 70,
+    tilt: -12,
+    colorStart: "brand-background-strong",
+    colorEnd: "static-transparent",
   },
   dots: {
     display: true,
-    opacity: 40,
+    opacity: 20,
     size: "2",
     color: "brand-background-strong",
   },

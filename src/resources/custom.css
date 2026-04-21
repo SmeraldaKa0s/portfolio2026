@@ -1,69 +1,63 @@
-/* :root {
-  /*
-  /* Override default variables here */
-  /*
-  --font-size-display-multiplier:   1;
-  --font-size-heading-multiplier:   1;
-  --font-size-body-multiplier:      1;
-  --font-size-label-multiplier:     1;
+/*
+ * Portfolio design system — custom palette.
+ *
+ * Built in OKLCH for perceptual uniformity. Chroma is reduced at light/dark extremes
+ * so highlights and deep shades don't skew garish. Neutrals are tinted toward the brand
+ * hue at very low chroma to create subconscious cohesion with the brand signature.
+ *
+ * Ladder convention (matches Once UI tokens.css):
+ *   100 = darkest, 1200 = lightest. 600 is the base signature step.
+ */
 
-  --line-height-display-multiplier: 1;
-  --line-height-heading-multiplier: 1;
-  --line-height-body-multiplier:    1;
-  --line-height-label-multiplier:   1;
+:root {
+  /* Brand — Deep violet (hue ~295°). The signature color. */
+  --scheme-brand-100:  oklch(12% 0.055 295);
+  --scheme-brand-200:  oklch(18% 0.09  295);
+  --scheme-brand-300:  oklch(26% 0.13  295);
+  --scheme-brand-400:  oklch(34% 0.165 295);
+  --scheme-brand-500:  oklch(42% 0.19  295);
+  --scheme-brand-600:  oklch(52% 0.2   295);
+  --scheme-brand-700:  oklch(62% 0.19  295);
+  --scheme-brand-800:  oklch(72% 0.15  295);
+  --scheme-brand-900:  oklch(82% 0.11  295);
+  --scheme-brand-1000: oklch(90% 0.07  295);
+  --scheme-brand-1100: oklch(95% 0.04  295);
+  --scheme-brand-1200: oklch(99% 0.015 295);
+  --scheme-brand-600-10: oklch(52% 0.2 295 / 0.1);
+  --scheme-brand-600-30: oklch(52% 0.2 295 / 0.3);
+  --scheme-brand-600-50: oklch(52% 0.2 295 / 0.5);
 
-  --default-border:        var(--neutral-border-medium);
+  /* Accent — Muted sage-olive (hue ~115°). Rare secondary; complementary to violet. */
+  --scheme-accent-100:  oklch(13% 0.02  115);
+  --scheme-accent-200:  oklch(19% 0.035 115);
+  --scheme-accent-300:  oklch(27% 0.05  115);
+  --scheme-accent-400:  oklch(35% 0.062 115);
+  --scheme-accent-500:  oklch(44% 0.072 115);
+  --scheme-accent-600:  oklch(54% 0.078 115);
+  --scheme-accent-700:  oklch(64% 0.075 115);
+  --scheme-accent-800:  oklch(74% 0.065 115);
+  --scheme-accent-900:  oklch(84% 0.05  115);
+  --scheme-accent-1000: oklch(91% 0.035 115);
+  --scheme-accent-1100: oklch(96% 0.02  115);
+  --scheme-accent-1200: oklch(99% 0.01  115);
+  --scheme-accent-600-10: oklch(54% 0.078 115 / 0.1);
+  --scheme-accent-600-30: oklch(54% 0.078 115 / 0.3);
+  --scheme-accent-600-50: oklch(54% 0.078 115 / 0.5);
 
-  /*
-  /* Example setup for custom colors */
-  /* Generate at: https://once-ui.com/customize */
-  /*
-  --scheme-brand-100: #08002f;
-  --scheme-brand-200:  #04025c;
-  --scheme-brand-300:  #1f398e;
-  --scheme-brand-400:  #3856ae;
-  --scheme-brand-500:  #5071cc;
-  --scheme-brand-600:  #6f94f1;
-  --scheme-brand-700:  #8db3ff;
-  --scheme-brand-800:  #b2dbff;
-  --scheme-brand-900:  #bfe8ff;
-  --scheme-brand-1000: #ccf6ff;
-  --scheme-brand-1100: #d2fcff;
-  --scheme-brand-1200: #d2fcff;
-  --scheme-brand-600-10: rgba(111,148,241,0.1);
-  --scheme-brand-600-30: rgba(111,148,241,0.3);
-  --scheme-brand-600-50: rgba(111,148,241,0.5);
-
-  --scheme-accent-100:  #030b10;
-  --scheme-accent-200:  #0d181d;
-  --scheme-accent-300:  #364248;
-  --scheme-accent-400:  #505d64;
-  --scheme-accent-500:  #69777e;
-  --scheme-accent-600:  #8a989f;
-  --scheme-accent-700:  #a8b7bf;
-  --scheme-accent-800:  #c8d7df;
-  --scheme-accent-900:  #d5e4ec;
-  --scheme-accent-1000: #e2f1f9;
-  --scheme-accent-1100: #e9f8ff;
-  --scheme-accent-1200: #efffff;
-  --scheme-accent-600-10: rgba(138,152,159,0.1);
-  --scheme-accent-600-30: rgba(138,152,159,0.3);
-  --scheme-accent-600-50: rgba(138,152,159,0.5);
-
-  --scheme-neutral-100:  #020b10;
-  --scheme-neutral-200:  #0b181d;
-  --scheme-neutral-300:  #344248;
-  --scheme-neutral-400:  #4f5d64;
-  --scheme-neutral-500:  #68777e;
-  --scheme-neutral-600:  #89989f;
-  --scheme-neutral-700:  #a7b7be;
-  --scheme-neutral-800:  #c7d7df;
-  --scheme-neutral-900:  #d4e4ec;
-  --scheme-neutral-1000: #e1f2f9;
-  --scheme-neutral-1100: #e7f8ff;
-  --scheme-neutral-1200: #eeffff;
-  --scheme-neutral-600-10: rgba(137,152,159,0.1);
-  --scheme-neutral-600-30: rgba(137,152,159,0.3);
-  --scheme-neutral-600-50: rgba(137,152,159,0.5);
-  /*
-}*/
+  /* Neutral — Cool stone (hue ~285°). Slight violet tint for cohesion with brand. */
+  --scheme-neutral-100:  oklch(11% 0.006 285);
+  --scheme-neutral-200:  oklch(16% 0.007 285);
+  --scheme-neutral-300:  oklch(23% 0.008 285);
+  --scheme-neutral-400:  oklch(32% 0.008 285);
+  --scheme-neutral-500:  oklch(44% 0.008 285);
+  --scheme-neutral-600:  oklch(55% 0.008 285);
+  --scheme-neutral-700:  oklch(66% 0.007 285);
+  --scheme-neutral-800:  oklch(78% 0.006 285);
+  --scheme-neutral-900:  oklch(87% 0.005 285);
+  --scheme-neutral-1000: oklch(93% 0.004 285);
+  --scheme-neutral-1100: oklch(97% 0.003 285);
+  --scheme-neutral-1200: oklch(99% 0.002 285);
+  --scheme-neutral-600-10: oklch(55% 0.008 285 / 0.1);
+  --scheme-neutral-600-30: oklch(55% 0.008 285 / 0.3);
+  --scheme-neutral-600-50: oklch(55% 0.008 285 / 0.5);
+}

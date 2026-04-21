@@ -43,7 +43,7 @@ export default function Home() {
 
       {/* Description hero — 60px, centered */}
       <Column fillWidth paddingY="xl" gap="l" horizontal="center">
-        <RevealFx translateY="4" fillWidth horizontal="center">
+        <RevealFx translateY="4" speed={400} fillWidth horizontal="center">
           <h1
             style={{
               fontSize: "60px",
@@ -70,7 +70,7 @@ export default function Home() {
             </span>
           </h1>
         </RevealFx>
-        <RevealFx translateY="8" delay={0.2}>
+        <RevealFx translateY="8" speed={400} delay={0.08}>
           <a
             href={about.path}
             style={{
@@ -98,7 +98,7 @@ export default function Home() {
       </Column>
 
       {/* All Projects */}
-      <RevealFx translateY="16" delay={0.4} fillWidth>
+      <RevealFx translateY="16" speed={400} delay={0.16} fillWidth>
         <Projects />
       </RevealFx>
     </Column>

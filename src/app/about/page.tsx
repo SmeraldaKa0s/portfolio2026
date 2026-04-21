@@ -8,6 +8,7 @@ import {
   Line,
   Media,
   Icon,
+  RevealFx,
 } from "@once-ui-system/core";
 import { Playfair_Display } from "next/font/google";
 import { baseURL, about, person } from "@/resources";
@@ -62,23 +63,27 @@ export default function About() {
           vertical="center"
           style={{ justifyContent: "center" }}
         >
-          <Text
-            variant="heading-default-l"
-            onBackground="neutral-weak"
-            className={playfair.className}
-            style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.5 }}
-          >
-            {about.intro.description}
-          </Text>
-          <a
-            href="#story"
-            className={styles.storyLink}
-          >
-            <span className={styles.arrowCircle}>
-              <Icon name="arrowDown" size="m" className={styles.arrowIcon} />
-            </span>
-            This is my story
-          </a>
+          <RevealFx translateY="4" speed={400}>
+            <Text
+              variant="heading-default-l"
+              onBackground="neutral-weak"
+              className={playfair.className}
+              style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.5 }}
+            >
+              {about.intro.description}
+            </Text>
+          </RevealFx>
+          <RevealFx translateY="8" speed={400} delay={0.08}>
+            <a
+              href="#story"
+              className={styles.storyLink}
+            >
+              <span className={styles.arrowCircle}>
+                <Icon name="arrowDown" size="m" className={styles.arrowIcon} />
+              </span>
+              This is my story
+            </a>
+          </RevealFx>
         </Column>
 
         {/* Right: avatar image — fixed size */}
@@ -88,19 +93,21 @@ export default function About() {
             horizontal="end"
             vertical="center"
           >
-            <div style={{ width: 590, maxWidth: "100%", height: 665, position: "relative" }}>
-              <Media
-                radius="l"
-                alt={person.name}
-                src={person.avatar}
-                sizes="590px"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
+            <RevealFx translateY="8" speed={400} delay={0.12}>
+              <div style={{ width: 590, maxWidth: "100%", height: 665, position: "relative" }}>
+                <Media
+                  radius="l"
+                  alt={person.name}
+                  src={person.avatar}
+                  sizes="590px"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            </RevealFx>
           </Column>
         )}
       </Row>

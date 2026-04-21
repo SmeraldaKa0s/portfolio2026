@@ -78,7 +78,7 @@ export default function Approach() {
     <Column maxWidth="m" fillWidth paddingY="xl">
       {/* Hero */}
       <Column fillWidth gap="m" paddingBottom="xl">
-        <RevealFx translateY="4">
+        <RevealFx translateY="4" speed={400}>
           <h1
             style={{
               fontSize: "72px",
@@ -108,7 +108,7 @@ export default function Approach() {
             </span>
           </h1>
         </RevealFx>
-        <RevealFx translateY="8" delay={0.15}>
+        <RevealFx translateY="8" speed={400} delay={0.08}>
           <Text
             variant="body-default-l"
             onBackground="neutral-weak"
@@ -125,7 +125,7 @@ export default function Approach() {
       {/* Articles list */}
       <Column fillWidth paddingTop="xl" gap="0">
         {articles.map((article, index) => (
-          <RevealFx key={article.title} translateY="8" delay={0.05 * index}>
+          <RevealFx key={article.title} translateY="8" speed={400} delay={Math.min(0.04 * index, 0.2)}>
             <SmartLink href={article.url} style={{ textDecoration: "none", color: "inherit" }}>
               <Column fillWidth paddingY="l" gap="12">
                 <Row gap="12" vertical="center">

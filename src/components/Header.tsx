@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 import { routes, person, about, work, blog, gallery } from "@/resources";
@@ -9,8 +9,19 @@ import styles from "./Header.module.scss";
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const focusMainOnNextNav = useRef(false);
+
+  useEffect(() => {
+    if (!focusMainOnNextNav.current) return;
+    focusMainOnNextNav.current = false;
+    const main = document.getElementById("main-content");
+    if (main instanceof HTMLElement) {
+      main.focus({ preventScroll: false });
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +59,36 @@ export const Header = () => {
     navItems.push({ href: "/blog", label: blog.label, num: counter++ });
   if (routes["/gallery"])
     navItems.push({ href: "/gallery", label: gallery.label, num: counter++ });
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+      const active = document.activeElement;
+      if (active instanceof HTMLElement) {
+        const tag = active.tagName;
+        if (
+          tag === "INPUT" ||
+          tag === "TEXTAREA" ||
+          tag === "SELECT" ||
+          active.isContentEditable
+        ) {
+          return;
+        }
+      }
+      const digit = Number.parseInt(e.key, 10);
+      if (!Number.isInteger(digit) || digit < 1 || digit > navItems.length) return;
+      const target = navItems[digit - 1];
+      if (!target) return;
+      e.preventDefault();
+      if (target.href === pathname) return;
+      focusMainOnNextNav.current = true;
+      router.push(target.href);
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+    // navItems is effectively static (derived from routes config, which doesn't change at runtime).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, pathname]);
 
   const calendarLink = "https://calendly.com/alexandra-lerner/30min?back=1&month=2026-04";
 

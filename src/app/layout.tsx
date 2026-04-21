@@ -156,7 +156,17 @@ export default async function RootLayout({
             />
           </RevealFx>
           <Header />
-          <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
+          <Flex
+            as="main"
+            id="main-content"
+            tabIndex={-1}
+            zIndex={0}
+            fillWidth
+            padding="l"
+            horizontal="center"
+            flex={1}
+            style={{ outline: "none" }}
+          >
             <Flex horizontal="center" fillWidth minHeight="0">
               {children}
             </Flex>

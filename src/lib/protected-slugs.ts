@@ -1,7 +1,6 @@
 export const PROTECTED_SLUGS = new Set<string>([
-  "automate-design-handovers-with-a-figma-to-code-pipeline",
   "building-once-ui-a-customizable-design-system",
-  "simple-portfolio-builder",
+  "evidencia-de-entrega-configurable-por-retailer",
 ]);
 
 export function isProtected(slug: string): boolean {
