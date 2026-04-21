@@ -94,9 +94,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        A Product Designer helping startups and teams ship with impact. Holistic by design — engaged across product, business, processes, and systems. Currently focused on UX for AI-integrated products and agent-first experiences.
       </>
     ),
   },
@@ -105,41 +103,69 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Pickit",
+        timeframe: "Jun 2025 — Present",
+        role: "Product Designer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Análisis, diseño e implementación de nuevos flujos en la vertical de última milla, alineados a objetivos de negocio y mejora continua de la operación.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Autonomía end-to-end: research, definición de flujos, wireframes, UI y prototipado. Colaboración activa en discovery y delivery junto a producto, negocio, desarrollo y operaciones.
+          </>,
+          <>
+            Gestión y evolución del design system: estandarización de componentes, autolayout, estructuración lógica de capas y reducción de deuda técnica heredada.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Phinx Lab",
+        timeframe: "Jun 2024 — Jun 2025",
+        role: "UX/UI Designer",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Diseño de productos digitales en fintech, salud y gaming. Dirección de procesos de research, flujos, wireframes, UI y prototipado.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Redefinición e implementación de procesos de diseño alineados a objetivos de producto y negocio, en trabajo interdisciplinario con desarrollo y dirección (CEO/CTO).
+          </>,
+          <>
+            Desarrollo de design systems y criterios de consistencia visual para escalar productos en aplicaciones y web responsive.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Freelance",
+        timeframe: "Oct 2021 — Feb 2025",
+        role: "UX/UI Engineer",
+        achievements: [
+          <>
+            Diseño de sitios desde cero, rediseño de apps existentes e identidad visual para marcas emergentes. Interfaces con foco en valor diferencial y coherencia visual.
+          </>,
+          <>
+            Prototipado de MVPs en Framer y desarrollo frontend en React, Next.js y Sass, con foco en responsive y accesibilidad.
+          </>,
+          <>
+            Análisis competitivo para detectar oportunidades de innovación; adaptación tecnológica según las necesidades de cada proyecto.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Ataway",
+        timeframe: "Oct 2022 — Sep 2023",
+        role: "Frontend Developer & UX Engineer",
+        achievements: [
+          <>
+            Diseño e iteración del MVP de una plataforma e-learning desde una perspectiva full-stack, partiendo de research y conceptualización UX.
+          </>,
+          <>
+            Documentación técnica, manuales de usuario y QA funcional en ciclos iterativos, aportando desde lo técnico a decisiones de producto y diseño.
+          </>,
+          <>
+            Stack: React, Next.js, MySQL, Node.js, Docker, Postman.
           </>,
         ],
         images: [],
@@ -151,12 +177,16 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Universidad Nacional de Tres de Febrero",
+        description: <>Licenciatura en Artes Electrónicas — programación para aplicaciones específicas, arte y ciencia. 2020 — 2025.</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Ada ITW",
+        description: <>Frontend Developer. 2021 — 2022.</>,
+      },
+      {
+        name: "Instituto Superior de Formación Técnica N°225",
+        description: <>Bibliotecología y Ciencia de la Información. 2018 — 2020.</>,
       },
     ],
   },
@@ -167,7 +197,7 @@ const about: About = {
       {
         title: "Figma",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>Prototipado y sistemas de diseño en Figma. Foco en autolayout, estandarización de componentes y escalabilidad — diseñar para que el sistema sobreviva al próximo handover.</>
         ),
         tags: [
           {
@@ -175,26 +205,12 @@ const about: About = {
             icon: "figma",
           },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        title: "Next.js",
+        title: "Frontend",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>Desarrollo en React, Next.js y Sass. Me siento cómoda puenteando diseño y código — entender cómo se construye cambia cómo diseño.</>
         ),
         tags: [
           {
@@ -205,20 +221,24 @@ const about: About = {
             name: "Next.js",
             icon: "nextjs",
           },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
+      },
+      {
+        title: "AI product design",
+        description: (
+          <>Diseño de interfaces para productos con IA integrada y experiencias agent-first. Certificada en Anthropic agent skills, Key Concepts Machine Learning, y UX Research Generativo: de la data a la acción.</>
+        ),
+        tags: [],
+        images: [],
+      },
+      {
+        title: "UX Research",
+        description: (
+          <>Investigación cualitativa, card sorting, encuestas y guerrilla research. Triangulación de datos de usuarios, mercado y academia para validar soluciones en contextos reales.</>
+        ),
+        tags: [],
+        images: [],
       },
     ],
   },

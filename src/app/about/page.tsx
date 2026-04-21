@@ -132,7 +132,7 @@ export default function About() {
                   variant="display-strong-l"
                   className={playfair.className}
                 >
-                  Passion brought me here
+                  From libraries to interfaces
                 </Heading>
               </Column>
 
@@ -141,21 +141,13 @@ export default function About() {
                   {about.intro.description}
                 </Text>
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  Computers and internet are two words that have shaped me since I was seven.
-                  When I was a little kid, I used to visit my father&apos;s office during weekends
-                  whenever he had extra work to do. I have wonderful memories of us spending time
-                  together while using his computer to explore a magical place called the World Wide Web.
+                  I work as a user advocate, focused on strategic and meaningful experiences. Mi práctica vive en la intersección de research, prototipado y diseño iterativo — del primer concepto al producto en producción.
                 </Text>
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  By the age of thirteen, I realized I could also be part of the movement that were
-                  shaping this new world. I made my first steps building my own websites, and later
-                  for others.
+                  Mi camino al diseño no fue directo. Empecé en Bibliotecología — donde el usuario también es el centro. Durante la Licenciatura en Artes Electrónicas trabajé con equipos multidisciplinarios haciendo research, market research y UX research para ayudar a clientes a patentar productos innovadores. En el camino sumé frontend, que me enseñó cómo se construye lo que diseño.
                 </Text>
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  After having my bachelor&apos;s degree in Advertising I received an offer to join a
-                  fast-growing startup for a position I didn&apos;t hear before: UX/UI Design. Since then
-                  I have never looked back, and I have been devoted to crafting meaningful digital
-                  experiences ever since.
+                  Cuando descubrí UX/UI Design, hizo click. Adapté lo que sabía, seguí aprendiendo, y empecé a diseñar con clientes reales. Hoy profundizo en UX para productos que integran IA — los patterns que definen cómo las personas colaboran con sistemas inteligentes.
                 </Text>
               </Column>
             </Column>
