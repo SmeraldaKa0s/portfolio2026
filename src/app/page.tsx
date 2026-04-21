@@ -6,7 +6,6 @@ import {
 } from "@once-ui-system/core";
 import { Playfair_Display } from "next/font/google";
 import { home, about, person, baseURL } from "@/resources";
-import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 
 const playfair = Playfair_Display({
@@ -102,7 +101,6 @@ export default function Home() {
       <RevealFx translateY="16" delay={0.4} fillWidth>
         <Projects />
       </RevealFx>
-      <Mailchimp />
     </Column>
   );
 }

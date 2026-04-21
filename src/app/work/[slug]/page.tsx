@@ -3,23 +3,15 @@ import { getPosts } from "@/utils/utils";
 import {
   Meta,
   Schema,
-  AvatarGroup,
-  Button,
   Column,
-  Flex,
   Heading,
-  Media,
-  Text,
-  SmartLink,
-  Row,
-  Avatar,
   Line,
 } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
-import { formatDate } from "@/utils/formatDate";
 import { ScrollToHash, CustomMDX } from "@/components";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
+import { ProjectShell } from "@/components/ProjectShell";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
@@ -68,13 +60,8 @@ export default async function Project({
     notFound();
   }
 
-  const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
-    })) || [];
-
   return (
-    <Column as="section" maxWidth="m" horizontal="center" gap="l">
+    <>
       <Schema
         as="blogPosting"
         baseURL={baseURL}
@@ -92,46 +79,24 @@ export default async function Project({
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column maxWidth="s" gap="16" horizontal="center" align="center">
-        <SmartLink href="/work">
-          <Text variant="label-strong-m">Projects</Text>
-        </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
-          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-        </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
-      </Column>
-      <Row marginBottom="32" horizontal="center">
-        <Row gap="16" vertical="center">
-          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
-          <Text variant="label-default-m" onBackground="brand-weak">
-            {post.metadata.team?.map((member, idx) => (
-              <span key={idx}>
-                {idx > 0 && (
-                  <Text as="span" onBackground="neutral-weak">
-                    ,{" "}
-                  </Text>
-                )}
-                <SmartLink href={member.linkedIn}>{member.name}</SmartLink>
-              </span>
-            ))}
-          </Text>
-        </Row>
-      </Row>
-      {post.metadata.images.length > 0 && (
-        <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />
-      )}
-      <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
-        <CustomMDX source={post.content} />
-      </Column>
-      <Column fillWidth gap="40" horizontal="center" marginTop="40">
-        <Line maxWidth="40" />
-        <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
-          Related projects
-        </Heading>
-        <Projects exclude={[post.slug]} range={[2]} />
-      </Column>
-      <ScrollToHash />
-    </Column>
+      <ProjectShell
+        title={post.metadata.title}
+        cover={post.metadata.images[0]}
+        publishedAt={post.metadata.publishedAt}
+        team={post.metadata.team}
+      >
+        <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
+          <CustomMDX source={post.content} />
+        </Column>
+        <Column fillWidth gap="40" horizontal="center" marginTop="40">
+          <Line maxWidth="40" />
+          <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
+            Related projects
+          </Heading>
+          <Projects exclude={[post.slug]} range={[2]} />
+        </Column>
+        <ScrollToHash />
+      </ProjectShell>
+    </>
   );
 }
