@@ -67,9 +67,11 @@ const fonts: FontsConfig = {
 // default customization applied to the HTML in the main layout.tsx
 const style: StyleConfig = {
   theme: "system", // dark | light | system
-  neutral: "custom", // sand | gray | slate | mint | rose | dusk | custom
-  brand: "custom", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
-  accent: "custom", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan | custom
+  // "custom" is runtime-valid (Once UI reads --scheme-* tokens from custom.css)
+  // but not in the shipped type union; cast to satisfy `next build`.
+  neutral: "custom" as StyleConfig["neutral"],
+  brand: "custom" as StyleConfig["brand"],
+  accent: "custom" as StyleConfig["accent"],
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
   border: "conservative", // rounded | playful | conservative | sharp
