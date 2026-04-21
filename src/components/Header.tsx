@@ -53,8 +53,8 @@ export const Header = () => {
     navItems.push({ href: "/", label: work.label, num: counter++ });
   if (routes["/about"])
     navItems.push({ href: "/about", label: about.label, num: counter++ });
-  // Lecturas
-  navItems.push({ href: "/approach", label: "Lecturas", num: counter++ });
+  // Lecturas — temporalmente oculto del navbar
+  // navItems.push({ href: "/approach", label: "Lecturas", num: counter++ });
   if (routes["/blog"])
     navItems.push({ href: "/blog", label: blog.label, num: counter++ });
   if (routes["/gallery"])
