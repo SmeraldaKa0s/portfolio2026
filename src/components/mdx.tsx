@@ -96,7 +96,7 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
     const slug = slugify(children as string);
     return (
       <ScrollReveal>
-        <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+        <HeadingLink marginTop="48" marginBottom="24" as={as} id={slug} {...props}>
           {children}
         </HeadingLink>
       </ScrollReveal>
@@ -173,7 +173,7 @@ function createListItem({ children }: { children: ReactNode }) {
 
 function createHR() {
   return (
-    <Row fillWidth horizontal="center">
+    <Row fillWidth horizontal="center" style={{ marginTop: "6rem", marginBottom: "6rem" }}>
       <Line maxWidth="40" />
     </Row>
   );

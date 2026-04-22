@@ -14,20 +14,11 @@ lockedTitle: "Una evidencia, muchos retailers"
 lockedSummary: "B2B2C · Seis aplicativos conectados · Sistema configurable de evidencia de entrega para los principales clientes del ecosistema [[Pickit]]"
 ---
 
-## Caso de estudio: Evidencia de entrega configurable por retailer
-
 **Rol:** UX Analyst · **Cliente:** Mercado Pago AR/MX, Getnet · **Plataforma:** Pickit (6 aplicativos conectados) · **Fecha:** 2026
-
----
 
 ## Métricas proyectadas
 
-- Reclamos por desconocimiento de entrega: **-50% por retailer**. Getnet 1% → 0,5%. MP 0,8% → 0,4%.
-- Tiempo de resolución de reclamos en atención al cliente: reducción significativa (estimación MVP).
-- MP + Getnet concentraban el grueso del volumen de entregas afectadas.
-- Seguimiento: Grafana.
-
----
+![Projected metrics for configurable proof of delivery project](/images/projects/projected_metrics-POD.svg)
 
 ## El problema
 
@@ -35,15 +26,11 @@ Pickit pedía la misma evidencia de entrega para todos sus clientes: nombre, ape
 
 El mismo problema se rompía por tres lados al mismo tiempo: no se podía configurar, no se podía trazar, y lo que faltaba de trazabilidad lo compensaban las personas.
 
----
-
 ## Artefacto visual
 
 **Mapa de actores × aplicativos.** Lo armamos en sesiones de ideación con el equipo y después con el PM lo sugerimos como USM para que lo analizara el equipo técnico. De las 24 intersecciones posibles, cuatro pedían diseño end-to-end, tres quedaron parciales, el resto fuera del release. Sin este mapa la conversación hubiera sido "toquemos todo porque todo se toca" —con el mapa, el recorte se volvió una decisión explícita.
 
 ![Mapa de actores por aplicativos del proyecto POD configurable](/images/projects/evidencia-de-entrega/mapa_actores_aplicativos_pod.svg)
-
----
 
 ## Cómo lo abordé
 
@@ -52,8 +39,6 @@ Arranqué reactivando un research del equipo de UX del 2023 que ya existía —n
 Trabajé con desarrollo desde el mapeo inicial, no en handoff. Eso permitió que decisiones estructurales (como unificar las dos tablas que guardaban datos del mismo evento) salieran del equipo técnico, no como imposición de diseño. Usé Pickit Components, el design system interno, para todos los aplicativos —me apoyé en patrones existentes y sumé dos componentes nuevos al sistema.
 
 Validé el flujo en calle haciendo de rider yo misma. El flujo de evidencia funcionó bien. Apareció fricción en otra parte del flujo que quedó documentada para un próximo release.
-
----
 
 ## Decisiones de diseño
 
@@ -69,22 +54,16 @@ Validé el flujo en calle haciendo de rider yo misma. El flujo de evidencia func
 
 **Web de comercio y web de puntos.** La evidencia vive dentro del tracking existente, no en un menú nuevo. Duplicar flujos mentales era regalar fricción.
 
----
-
 ## Qué dejé afuera del R1
 
 - **Notificación automática al comprador con la evidencia.** Alto valor percibido, pero dependía de coordinar copy con marketing en seis mercados y de un canal de notificación que todavía no existía. Se podía diseñar, no se podía lanzar.
 - **Reglas de validación cruzada entre configuraciones** (ejemplo: bloquear DNI sin nombre). Fácil de construir, imposible de justificar sin ver cómo los clientes usaban la configuración libre. Primero observar, después restringir.
-
----
 
 ## Lo que me llevo
 
 Atención al cliente tenía la información distribuida en carpetas del escritorio, un drive compartido con el operador logístico, un servidor externo y conversaciones de chat. Centralizar esa información en el detalle de la transacción no fue un cambio de UI, fue un cambio de modelo mental —pasar de "buscar evidencia" a "consultar evidencia".
 
 El otro aprendizaje vino de testear la feature haciendo de rider yo misma. Lo que diseñé funcionaba. Lo valioso fue encontrar fricción en otra parte del flujo que ni siquiera era mi scope. Una feature nunca se testea sola: se testea el sistema.
-
----
 
 ## Dónde van los mockups
 
@@ -93,8 +72,6 @@ El otro aprendizaje vino de testear la feature haciendo de rider yo misma. Lo qu
 3. App del rider — pantalla de foto con componente registrada
 4. Panel de administración — detalle con miniaturas de evidencia
 5. Web de comercio — historial con evidencia
-
----
 
 ## Anexo
 

@@ -64,14 +64,24 @@ export default function About() {
           style={{ justifyContent: "flex-end", paddingBottom: "80px" }}
         >
           <RevealFx translateY="4" speed={400}>
-            <Text
-              variant="heading-default-l"
-              onBackground="neutral-weak"
-              className={playfair.className}
-              style={{ fontSize: "21px", lineHeight: 1.5 }}
-            >
-              {about.intro.description}
-            </Text>
+            <Column gap="16">
+              <Text
+                variant="heading-default-l"
+                onBackground="neutral-weak"
+                className={playfair.className}
+                style={{ fontSize: "21px", lineHeight: 1.5 }}
+              >
+                {about.intro.description}
+              </Text>
+              <Text
+                variant="heading-default-l"
+                onBackground="neutral-weak"
+                className={playfair.className}
+                style={{ fontSize: "21px", lineHeight: 1.5 }}
+              >
+                Startup speed. Product mindset. UX that drives outcomes.
+              </Text>
+            </Column>
           </RevealFx>
           <RevealFx translateY="8" speed={400} delay={0.08}>
             <a
@@ -195,8 +205,7 @@ export default function About() {
                   {/* Timeframe */}
                   <Column flex={3} gap="4">
                     <Text
-                      onBackground="neutral-weak"
-                      style={{ fontSize: "21px", lineHeight: 1.4 }}
+                      style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
                     >
                       {experience.timeframe}
                     </Text>
@@ -291,7 +300,15 @@ export default function About() {
                   gap="xl"
                   s={{ direction: "column" }}
                 >
-                  <Column flex={3} />
+                  <Column flex={3} gap="4">
+                    {institution.timeframe && (
+                      <Text
+                        style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
+                      >
+                        {institution.timeframe}
+                      </Text>
+                    )}
+                  </Column>
                   <Column flex={5} gap="4">
                     <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
                       {institution.name}

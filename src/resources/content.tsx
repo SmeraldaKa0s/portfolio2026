@@ -157,15 +157,18 @@ const about: About = {
     institutions: [
       {
         name: "Universidad Nacional de Tres de Febrero",
-        description: <>Licenciatura en Artes Electrónicas — programación para aplicaciones específicas, arte y ciencia. 2020 — 2025.</>,
+        description: <>Licenciatura en Artes Electrónicas — programación para aplicaciones específicas, arte y ciencia.</>,
+        timeframe: "2020 — 2025",
       },
       {
         name: "Ada ITW",
-        description: <>Frontend Developer. 2021 — 2022.</>,
+        description: <>Frontend Developer.</>,
+        timeframe: "2021 — 2022",
       },
       {
         name: "Instituto Superior de Formación Técnica N°225",
-        description: <>Bibliotecología y Ciencia de la Información. 2018 — 2020.</>,
+        description: <>Bibliotecología y Ciencia de la Información.</>,
+        timeframe: "2018 — 2020",
       },
     ],
   },
