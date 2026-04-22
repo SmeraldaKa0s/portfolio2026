@@ -133,7 +133,7 @@ export const Header = () => {
           <div className={styles.desktopCta}>
             <a
               href={calendarLink}
-              className={styles.cta}
+              className={styles.ctaLink}
               target="_blank"
               rel="noopener noreferrer"
             >
