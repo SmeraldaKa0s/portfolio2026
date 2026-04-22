@@ -22,7 +22,10 @@ export async function POST(req: Request) {
   const expected = process.env.PAGE_ACCESS_PASSWORD ?? "";
 
   if (!expected || !process.env.SESSION_SECRET) {
-    return NextResponse.json({ error: "misconfigured" }, { status: 500 });
+    const missing: string[] = [];
+    if (!expected) missing.push("PAGE_ACCESS_PASSWORD");
+    if (!process.env.SESSION_SECRET) missing.push("SESSION_SECRET");
+    return NextResponse.json({ error: "misconfigured", missing }, { status: 500 });
   }
 
   if (typeof password !== "string" || !safeEqual(password, expected)) {

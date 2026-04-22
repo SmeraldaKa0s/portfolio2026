@@ -60,7 +60,12 @@ export function ProjectGate() {
           break;
         case 500:
           if (body?.error === "misconfigured") {
-            setError("El servidor no tiene la configuración de acceso. Avisale al admin.");
+            const missing = Array.isArray(body.missing) ? body.missing.join(", ") : "";
+            setError(
+              missing
+                ? `Falta configurar en el servidor: ${missing}.`
+                : "El servidor no tiene la configuración de acceso. Avisale al admin."
+            );
           } else {
             setError("Error del servidor (500)");
           }
