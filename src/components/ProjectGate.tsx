@@ -48,10 +48,25 @@ export function ProjectGate() {
         router.refresh();
         return;
       }
-      if (res.status === 429) {
-        setError("Demasiados intentos. Probá más tarde.");
-      } else {
-        setError("Clave incorrecta");
+
+      const body = await res.json().catch(() => ({}));
+
+      switch (res.status) {
+        case 401:
+          setError("Clave incorrecta");
+          break;
+        case 429:
+          setError("Demasiados intentos. Probá más tarde.");
+          break;
+        case 500:
+          if (body?.error === "misconfigured") {
+            setError("El servidor no tiene la configuración de acceso. Avisale al admin.");
+          } else {
+            setError("Error del servidor (500)");
+          }
+          break;
+        default:
+          setError(`Error del servidor (${res.status})`);
       }
     } catch {
       setError("Error de red");
