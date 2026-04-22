@@ -7,7 +7,7 @@ const person: Person = {
   name: `Alexandra`,
   role: "Product designer",
   avatar: "/images/alexandra-image-portfolio.png",
-  email: "example@gmail.com",
+  email: "alek.xandra.lerner@gmail.com",
   location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: [], // optional: Leave the array empty if you don't want to display languages
 };
@@ -19,37 +19,16 @@ const newsletter: Newsletter = {
 };
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  // Set essentials: true for links you want to show on the about page
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system",
-    essential: true,
-  },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-    essential: true,
-  },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    link: "https://www.linkedin.com/in/alx-l/",
     essential: true,
   },
   {
     name: "Email",
     icon: "email",
-    link: `mailto:${person.email}`,
+    link: "mailto:alek.xandra.lerner@gmail.com",
     essential: true,
   },
 ];
@@ -94,7 +73,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        A Product Designer helping startups and teams ship with impact. Holistic by design — engaged across product, business, processes, and systems. Currently focused on UX for AI-integrated products and agent-first experiences.
+        Hello, My name is Alexandra, and I design products that work for everyone—the people who use them, the ones who build them—creating experiences that actually matter.
       </>
     ),
   },

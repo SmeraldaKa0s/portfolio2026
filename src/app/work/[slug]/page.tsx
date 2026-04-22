@@ -75,8 +75,6 @@ export default async function Project({
       <ProjectShell
         title={post.metadata.title}
         cover={post.metadata.images[0]}
-        publishedAt={post.metadata.publishedAt}
-        team={post.metadata.team}
       >
         <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
           <CustomMDX source={post.content} />

@@ -10,7 +10,7 @@ import { Projects } from "@/components/work/Projects";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -41,19 +41,18 @@ export default function Home() {
         }}
       />
 
-      {/* Description hero — 60px, centered */}
-      <Column fillWidth paddingY="xl" gap="l" horizontal="center">
-        <RevealFx translateY="4" speed={400} fillWidth horizontal="center">
+      {/* Description hero — full viewport, centered */}
+      <Column fillWidth gap="l" horizontal="center" vertical="center" style={{ maxWidth: "600px", margin: "0 auto", minHeight: "100vh" }}>
+        <RevealFx translateY="4" speed={400} fillWidth>
           <h1
             style={{
-              fontSize: "60px",
+              fontSize: "40px",
               fontWeight: 400,
-              lineHeight: 1.15,
+              lineHeight: 1.25,
               color: "var(--neutral-on-background-weak)",
-              letterSpacing: "-0.02em",
-              maxWidth: "950px",
+              letterSpacing: "-0.01em",
               margin: 0,
-              textAlign: "center",
+              textAlign: "justify",
             }}
           >
             <strong
@@ -65,16 +64,19 @@ export default function Home() {
             >
               {person.firstName}
             </strong>{" "}
-            <span className={playfair.className} style={{ fontWeight: 400 }}>
-              is a {person.role}. {home.subline}
+            <span
+              className={playfair.className}
+              style={{ fontWeight: 400, fontStyle: "italic" }}
+            >
+              is a full-stack designer, devoted to designing products that give you competitive advantage combining human-centered strategy, data, and AI.
             </span>
           </h1>
         </RevealFx>
-        <RevealFx translateY="8" speed={400} delay={0.08}>
+        <RevealFx translateY="8" speed={400} delay={0.08} fillWidth>
           <a
             href={about.path}
             style={{
-              display: "flex",
+              display: "inline-flex",
               alignItems: "center",
               gap: "0.625rem",
               fontSize: "1.125rem",

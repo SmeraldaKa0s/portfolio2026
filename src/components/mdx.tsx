@@ -1,6 +1,7 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import React, { ReactNode } from "react";
 import { slugify as transliterate } from "transliteration";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 import {
   Heading,
@@ -63,17 +64,19 @@ function createImage({ alt, src, ...props }: MediaProps & { src: string }) {
   }
 
   return (
-    <Media
-      marginTop="8"
-      marginBottom="16"
-      enlarge
-      radius="m"
-      border="neutral-alpha-medium"
-      sizes="(max-width: 960px) 100vw, 960px"
-      alt={alt}
-      src={src}
-      {...props}
-    />
+    <ScrollReveal>
+      <Media
+        marginTop="8"
+        marginBottom="16"
+        enlarge
+        radius="m"
+        border="neutral-alpha-medium"
+        sizes="(max-width: 960px) 100vw, 960px"
+        alt={alt}
+        src={src}
+        {...props}
+      />
+    </ScrollReveal>
   );
 }
 
@@ -92,9 +95,11 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
   }: Omit<React.ComponentProps<typeof HeadingLink>, "as" | "id">) => {
     const slug = slugify(children as string);
     return (
-      <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
-        {children}
-      </HeadingLink>
+      <ScrollReveal>
+        <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+          {children}
+        </HeadingLink>
+      </ScrollReveal>
     );
   };
 
@@ -105,15 +110,17 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
 
 function createParagraph({ children }: TextProps) {
   return (
-    <Text
-      style={{ lineHeight: "175%" }}
-      variant="body-default-m"
-      onBackground="neutral-medium"
-      marginTop="8"
-      marginBottom="12"
-    >
-      {children}
-    </Text>
+    <ScrollReveal>
+      <Text
+        style={{ lineHeight: "175%" }}
+        variant="body-default-m"
+        onBackground="neutral-medium"
+        marginTop="8"
+        marginBottom="12"
+      >
+        {children}
+      </Text>
+    </ScrollReveal>
   );
 }
 
@@ -156,9 +163,11 @@ function createList(as: "ul" | "ol") {
 
 function createListItem({ children }: { children: ReactNode }) {
   return (
-    <ListItem marginTop="4" marginBottom="8" style={{ lineHeight: "175%" }}>
-      {children}
-    </ListItem>
+    <ScrollReveal>
+      <ListItem marginTop="4" marginBottom="8" style={{ lineHeight: "175%" }}>
+        {children}
+      </ListItem>
+    </ScrollReveal>
   );
 }
 

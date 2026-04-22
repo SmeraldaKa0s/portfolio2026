@@ -54,21 +54,21 @@ export default function About() {
         gap="xl"
         paddingY="xl"
         s={{ direction: "column" }}
-        style={{ minHeight: "85vh", alignItems: "stretch" }}
+        style={{ minHeight: "85vh", alignItems: "end" }}
       >
-        {/* Left: intro text + CTA — vertically centered */}
+        {/* Left: intro text + CTA — aligned to bottom */}
         <Column
           flex={5}
-          gap="xl"
-          vertical="center"
-          style={{ justifyContent: "center" }}
+          gap="32"
+          vertical="end"
+          style={{ justifyContent: "flex-end", paddingBottom: "80px" }}
         >
           <RevealFx translateY="4" speed={400}>
             <Text
               variant="heading-default-l"
               onBackground="neutral-weak"
               className={playfair.className}
-              style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.5 }}
+              style={{ fontSize: "21px", lineHeight: 1.5 }}
             >
               {about.intro.description}
             </Text>
@@ -138,16 +138,19 @@ export default function About() {
 
               <Column gap="l">
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  {about.intro.description}
+                  My path to design wasn't direct. It started in libraries, where I learned that information only matters when someone can actually find it. That idea — that structure and context decide whether something is useful or just noise — became the through-line of everything I've done since.
                 </Text>
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  I work as a user advocate, focused on strategic and meaningful experiences. Mi práctica vive en la intersección de research, prototipado y diseño iterativo — del primer concepto al producto en producción.
+                  During my degree in Electronic Arts I worked with multidisciplinary teams doing research to help clients patent innovative products. Along the way I picked up frontend development, which taught me how the things I design are actually built.
                 </Text>
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  Mi camino al diseño no fue directo. Empecé en Bibliotecología — donde el usuario también es el centro. Durante la Licenciatura en Artes Electrónicas trabajé con equipos multidisciplinarios haciendo research, market research y UX research para ayudar a clientes a patentar productos innovadores. En el camino sumé frontend, que me enseñó cómo se construye lo que diseño.
+                  When I discovered UX/UI Design, it clicked. I've since designed for fintech, healthcare, gaming and logistics — currently working on systems that serve multiple audiences across Latin America, where a single design decision can ripple through operators, riders, sellers and end users at once.
                 </Text>
                 <Text onBackground="neutral-weak" variant="body-default-l">
-                  Cuando descubrí UX/UI Design, hizo click. Adapté lo que sabía, seguí aprendiendo, y empecé a diseñar con clientes reales. Hoy profundizo en UX para productos que integran IA — los patterns que definen cómo las personas colaboran con sistemas inteligentes.
+                  Right now I'm focused on what I believe is the most interesting shift in our field: how AI is changing the way we design and build products. I work with a design-to-code flow using Claude Code, moving from intent to production with rapid iteration and measurement built in from day one. I don't think AI replaces craft — I think it raises the bar for where craft matters. Good taste without accountability is just decoration. Good taste with accountability is leadership.
+                </Text>
+                <Text onBackground="neutral-weak" variant="body-default-l">
+                  My practice lives at the intersection of research, prototyping and iterative design — from first concept to production. I care about the people on both sides of the interface: the ones using it and the ones building it.
                 </Text>
               </Column>
             </Column>
