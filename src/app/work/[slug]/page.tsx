@@ -1,10 +1,16 @@
 import { notFound } from "next/navigation";
 import { getPosts } from "@/utils/utils";
-import { Meta, Schema, Column } from "@once-ui-system/core";
+import { Meta, Schema, Column, Row, Text, Line, Media } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { ScrollToHash, CustomMDX } from "@/components";
 import { Metadata } from "next";
-import { ProjectShell } from "@/components/ProjectShell";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
@@ -37,6 +43,35 @@ export async function generateMetadata({
   });
 }
 
+/** Split MDX body into sections by ## headings */
+function parseSections(content: string): { title: string; body: string }[] {
+  // Normalize \r\n to \n for consistent regex matching
+  const normalized = content.replace(/\r\n/g, "\n");
+  const lines = normalized.split("\n");
+  const sections: { title: string; body: string }[] = [];
+  let currentTitle = "";
+  let currentBody: string[] = [];
+
+  for (const line of lines) {
+    const h2Match = line.match(/^## (.+)/);
+    if (h2Match) {
+      if (currentTitle || currentBody.length > 0) {
+        sections.push({ title: currentTitle, body: currentBody.join("\n").trim() });
+      }
+      currentTitle = h2Match[1].trim();
+      currentBody = [];
+    } else {
+      currentBody.push(line);
+    }
+  }
+
+  if (currentTitle || currentBody.length > 0) {
+    sections.push({ title: currentTitle, body: currentBody.join("\n").trim() });
+  }
+
+  return sections;
+}
+
 export default async function Project({
   params,
 }: {
@@ -52,6 +87,8 @@ export default async function Project({
   if (!post) {
     notFound();
   }
+
+  const sections = parseSections(post.content);
 
   return (
     <>
@@ -72,15 +109,68 @@ export default async function Project({
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <ProjectShell
-        title={post.metadata.title}
-        cover={post.metadata.images[0]}
-      >
-        <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
-          <CustomMDX source={post.content} />
+
+      <Column as="section" maxWidth="m" horizontal="center" gap="l" marginTop="xl" fillWidth>
+        {/* Project title */}
+        <Column maxWidth="m" gap="16" paddingBottom="l">
+          <Text
+            variant="display-strong-l"
+            as="h1"
+            style={{ fontSize: "clamp(32px, 5vw, 48px)", letterSpacing: "-0.02em", lineHeight: 1.1 }}
+          >
+            {post.metadata.title}
+          </Text>
         </Column>
+
+        {/* Cover image */}
+        {post.metadata.images[0] && (
+          <Media
+            priority
+            aspectRatio="16 / 9"
+            radius="m"
+            alt=""
+            src={post.metadata.images[0]}
+          />
+        )}
+
+        {/* Sections with sticky titles */}
+        {sections.map((section, index) => (
+          <Column key={index} fillWidth paddingY="l">
+            {index > 0 && <Line marginBottom="xl" />}
+
+            <Row fillWidth gap="xl" s={{ direction: "column" }}>
+              {/* Sticky title — left column */}
+              <Column
+                flex={3}
+                style={{ position: "sticky", top: 100, alignSelf: "flex-start" }}
+                s={{ style: { position: "relative", top: "auto" } }}
+              >
+                {section.title && (
+                  <Text
+                    className={playfair.className}
+                    style={{
+                      fontSize: "34px",
+                      fontStyle: "italic",
+                      fontWeight: 400,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {section.title}
+                  </Text>
+                )}
+              </Column>
+
+              {/* Scrolling content — right column */}
+              <Column flex={7} gap="m" as="article">
+                {section.body && (
+                  <CustomMDX source={section.body} />
+                )}
+              </Column>
+            </Row>
+          </Column>
+        ))}
         <ScrollToHash />
-      </ProjectShell>
+      </Column>
     </>
   );
 }
