@@ -48,7 +48,7 @@ export const Header = () => {
 
   const navItems: { href: string; label: string; num: number }[] = [];
   let counter = 1;
-  // Work points to home — home IS the work/projects page
+  // Work and home are the same page
   if (routes["/work"])
     navItems.push({ href: "/", label: work.label, num: counter++ });
   if (routes["/about"])
@@ -94,7 +94,6 @@ export const Header = () => {
 
   const isActive = (href: string) => {
     if (href === "/") {
-      // Work is active on home and on /work/* case study pages
       return pathname === "/" || pathname.startsWith("/work");
     }
     return pathname === href || pathname.startsWith(href + "/");

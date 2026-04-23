@@ -87,13 +87,19 @@ const about: About = {
         role: "Product Designer",
         achievements: [
           <>
-            Análisis, diseño e implementación de nuevos flujos en la vertical de última milla, alineados a objetivos de negocio y mejora continua de la operación.
+            End-to-end design of last-mile logistics flows, aligned with business goals and operational improvement.
           </>,
           <>
-            Autonomía end-to-end: research, definición de flujos, wireframes, UI y prototipado. Colaboración activa en discovery y delivery junto a producto, negocio, desarrollo y operaciones.
+            AI-integrated design: design-to-code flow with Claude Code, iterating directly in production with measurement and A/B testing from day one.
           </>,
           <>
-            Gestión y evolución del design system: estandarización de componentes, autolayout, estructuración lógica de capas y reducción de deuda técnica heredada.
+            Full ownership of the design process: research, flows, wireframes, UI and prototyping, collaborating with product, business, engineering and operations across discovery and delivery.
+          </>,
+          <>
+            Design system evolution: component standardization and reduction of technical debt.
+          </>,
+          <>
+            Coordinate design practices across the team to ensure consistency across verticals.
           </>,
         ],
         images: [],
@@ -104,30 +110,16 @@ const about: About = {
         role: "UX/UI Designer",
         achievements: [
           <>
-            Diseño de productos digitales en fintech, salud y gaming. Dirección de procesos de research, flujos, wireframes, UI y prototipado.
+            Digital product design across fintech, healthcare and gaming.
           </>,
           <>
-            Redefinición e implementación de procesos de diseño alineados a objetivos de producto y negocio, en trabajo interdisciplinario con desarrollo y dirección (CEO/CTO).
+            Led end-to-end design process: research, flows, wireframes, UI and prototyping.
           </>,
           <>
-            Desarrollo de design systems y criterios de consistencia visual para escalar productos en aplicaciones y web responsive.
-          </>,
-        ],
-        images: [],
-      },
-      {
-        company: "Freelance",
-        timeframe: "Oct 2021 — Feb 2025",
-        role: "UX/UI Engineer",
-        achievements: [
-          <>
-            Diseño de sitios desde cero, rediseño de apps existentes e identidad visual para marcas emergentes. Interfaces con foco en valor diferencial y coherencia visual.
+            Redefined and implemented design processes aligned with product and business goals, collaborating with development and leadership (CEO/CTO).
           </>,
           <>
-            Prototipado de MVPs en Framer y desarrollo frontend en React, Next.js y Sass, con foco en responsive y accesibilidad.
-          </>,
-          <>
-            Análisis competitivo para detectar oportunidades de innovación; adaptación tecnológica según las necesidades de cada proyecto.
+            Built design systems and visual consistency criteria to scale products across web and mobile.
           </>,
         ],
         images: [],
@@ -138,13 +130,41 @@ const about: About = {
         role: "Frontend Developer & UX Engineer",
         achievements: [
           <>
-            Diseño e iteración del MVP de una plataforma e-learning desde una perspectiva full-stack, partiendo de research y conceptualización UX.
+            MVP design and iteration of an e-learning platform from a full-stack perspective, from research and UX conceptualization to implementation.
           </>,
           <>
-            Documentación técnica, manuales de usuario y QA funcional en ciclos iterativos, aportando desde lo técnico a decisiones de producto y diseño.
+            Technical documentation, user manuals and functional QA across iterative cycles, informing product and design decisions from a technical standpoint.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Freelance",
+        timeframe: "Oct 2021 — Feb 2025",
+        role: "UX/UI Engineer",
+        achievements: [
+          <>
+            Website design from scratch, app redesigns and visual identity for emerging brands.
           </>,
           <>
-            Stack: React, Next.js, MySQL, Node.js, Docker, Postman.
+            MVP prototyping in Framer and frontend development in React, Next.js and Sass, with focus on responsive and accessibility.
+          </>,
+          <>
+            Competitive analysis to identify innovation opportunities; adapted tech stack to each project's needs.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "UNTREF",
+        timeframe: "Mar 2022 — Mar 2023",
+        role: "UX Researcher",
+        achievements: [
+          <>
+            Contributed to strategic research guiding companies in tech innovation and patent development.
+          </>,
+          <>
+            Participated in discovery sessions with stakeholders in multidisciplinary environments, triangulating user, market and academic data.
           </>,
         ],
         images: [],
@@ -156,18 +176,18 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "Universidad Nacional de Tres de Febrero",
-        description: <>Licenciatura en Artes Electrónicas — programación para aplicaciones específicas, arte y ciencia.</>,
+        name: "Bachelor of Arts in Electronic Arts — Arts, Sciences and Technology.",
+        description: <>UNTREF</>,
         timeframe: "2020 — 2025",
       },
       {
-        name: "Ada ITW",
-        description: <>Frontend Developer.</>,
+        name: "Bootcamp in Frontend Developer",
+        description: <>ADA ITW</>,
         timeframe: "2021 — 2022",
       },
       {
-        name: "Instituto Superior de Formación Técnica N°225",
-        description: <>Bibliotecología y Ciencia de la Información.</>,
+        name: "Library and Information Science.",
+        description: <>ISFT n° 182</>,
         timeframe: "2018 — 2020",
       },
     ],
@@ -177,39 +197,25 @@ const about: About = {
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
+        title: "Design",
         description: (
-          <>Prototipado y sistemas de diseño en Figma. Foco en autolayout, estandarización de componentes y escalabilidad — diseñar para que el sistema sobreviva al próximo handover.</>
+          <>Figma · Design Systems · Prototyping · UI · Autolayout · Component standardization · Storybook · Design Tokens · Microcopy · Information Architecture</>
         ),
-        tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
-        ],
+        tags: [],
+        images: [],
+      },
+      {
+        title: "AI Product Design",
+        description: (
+          <>Claude Code · Design-to-code workflows · Agent-first interfaces · AI-integrated UX · Prompt engineering</>
+        ),
+        tags: [],
         images: [],
       },
       {
         title: "Frontend",
         description: (
-          <>Desarrollo en React, Next.js y Sass. Me siento cómoda puenteando diseño y código — entender cómo se construye cambia cómo diseño.</>
-        ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-        ],
-        images: [],
-      },
-      {
-        title: "AI product design",
-        description: (
-          <>Diseño de interfaces para productos con IA integrada y experiencias agent-first. Certificada en Anthropic agent skills, Key Concepts Machine Learning, y UX Research Generativo: de la data a la acción.</>
+          <>React · Next.js · Sass · Tailwind · HTML · CSS · JavaScript · Responsive · Accessibility · Git</>
         ),
         tags: [],
         images: [],
@@ -217,7 +223,15 @@ const about: About = {
       {
         title: "UX Research",
         description: (
-          <>Investigación cualitativa, card sorting, encuestas y guerrilla research. Triangulación de datos de usuarios, mercado y academia para validar soluciones en contextos reales.</>
+          <>Qualitative research · Card sorting · Surveys · Guerrilla research · Usability testing · Competitive analysis · Data triangulation · Desk research</>
+        ),
+        tags: [],
+        images: [],
+      },
+      {
+        title: "Collaboration & Process",
+        description: (
+          <>Discovery & delivery · Cross-functional teams · Agile (Scrum/Kanban) · Stakeholder management · Design critique · A/B testing</>
         ),
         tags: [],
         images: [],

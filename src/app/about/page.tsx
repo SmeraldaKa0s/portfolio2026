@@ -13,6 +13,7 @@ import {
 import { Playfair_Display } from "next/font/google";
 import { baseURL, about, person } from "@/resources";
 import React from "react";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import styles from "./about.module.scss";
 
 const playfair = Playfair_Display({
@@ -147,21 +148,31 @@ export default function About() {
               </Column>
 
               <Column gap="l">
-                <Text onBackground="neutral-weak" variant="body-default-l">
-                  My path to design wasn't direct. It started in libraries, where I learned that information only matters when someone can actually find it. That idea — that structure and context decide whether something is useful or just noise — became the through-line of everything I've done since.
-                </Text>
-                <Text onBackground="neutral-weak" variant="body-default-l">
-                  During my degree in Electronic Arts I worked with multidisciplinary teams doing research to help clients patent innovative products. Along the way I picked up frontend development, which taught me how the things I design are actually built.
-                </Text>
-                <Text onBackground="neutral-weak" variant="body-default-l">
-                  When I discovered UX/UI Design, it clicked. I've since designed for fintech, healthcare, gaming and logistics — currently working on systems that serve multiple audiences across Latin America, where a single design decision can ripple through operators, riders, sellers and end users at once.
-                </Text>
-                <Text onBackground="neutral-weak" variant="body-default-l">
-                  Right now I'm focused on what I believe is the most interesting shift in our field: how AI is changing the way we design and build products. I work with a design-to-code flow using Claude Code, moving from intent to production with rapid iteration and measurement built in from day one. I don't think AI replaces craft — I think it raises the bar for where craft matters. Good taste without accountability is just decoration. Good taste with accountability is leadership.
-                </Text>
-                <Text onBackground="neutral-weak" variant="body-default-l">
-                  My practice lives at the intersection of research, prototyping and iterative design — from first concept to production. I care about the people on both sides of the interface: the ones using it and the ones building it.
-                </Text>
+                <ScrollReveal>
+                  <Text onBackground="neutral-weak" variant="body-default-l">
+                    My path to design wasn't direct. It started in libraries, where I learned that information only matters when someone can actually find it. That idea — that structure and context decide whether something is useful or just noise — became the through-line of everything I've done since.
+                  </Text>
+                </ScrollReveal>
+                <ScrollReveal delay={0.05}>
+                  <Text onBackground="neutral-weak" variant="body-default-l">
+                    During my degree in Electronic Arts I worked with multidisciplinary teams doing research to help clients patent innovative products. Along the way I picked up frontend development, which taught me how the things I design are actually built.
+                  </Text>
+                </ScrollReveal>
+                <ScrollReveal delay={0.1}>
+                  <Text onBackground="neutral-weak" variant="body-default-l">
+                    When I discovered UX/UI Design, it clicked. I've since designed for fintech, healthcare, gaming and logistics — currently working on systems that serve multiple audiences across Latin America, where a single design decision can ripple through operators, riders, sellers and end users at once.
+                  </Text>
+                </ScrollReveal>
+                <ScrollReveal delay={0.15}>
+                  <Text onBackground="neutral-weak" variant="body-default-l">
+                    Right now I'm focused on what I believe is the most interesting shift in our field: how AI is changing the way we design and build products. I work with a design-to-code flow using Claude Code, moving from intent to production with rapid iteration and measurement built in from day one. I don't think AI replaces craft — I think it raises the bar for where craft matters. Good taste without accountability is just decoration. Good taste with accountability is leadership.
+                  </Text>
+                </ScrollReveal>
+                <ScrollReveal delay={0.2}>
+                  <Text onBackground="neutral-weak" variant="body-default-l">
+                    My practice lives at the intersection of research, prototyping and iterative design — from first concept to production. I care about the people on both sides of the interface: the ones using it and the ones building it.
+                  </Text>
+                </ScrollReveal>
               </Column>
             </Column>
           </Row>
@@ -196,72 +207,73 @@ export default function About() {
             {/* Entries */}
             <Column flex={7} gap="48">
               {about.work.experiences.map((experience, index) => (
-                <Row
-                  key={`${experience.company}-${experience.role}-${index}`}
-                  fillWidth
-                  gap="xl"
-                  s={{ direction: "column" }}
-                >
-                  {/* Timeframe */}
-                  <Column flex={3} gap="4">
-                    <Text
-                      style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
-                    >
-                      {experience.timeframe}
-                    </Text>
-                  </Column>
+                <ScrollReveal key={`${experience.company}-${experience.role}-${index}`}>
+                  <Row
+                    fillWidth
+                    gap="xl"
+                    s={{ direction: "column" }}
+                  >
+                    {/* Timeframe */}
+                    <Column flex={3} gap="4">
+                      <Text
+                        style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
+                      >
+                        {experience.timeframe}
+                      </Text>
+                    </Column>
 
-                  {/* Role + Company + Description */}
-                  <Column flex={5} gap="8">
-                    <Text
-                      variant="heading-strong-l"
-                      style={{ fontSize: "21px", lineHeight: 1.4 }}
-                    >
-                      {experience.role}
-                    </Text>
-                    <Text
-                      onBackground="neutral-weak"
-                      style={{ fontSize: "16px", lineHeight: 1.4 }}
-                    >
-                      {experience.company}
-                    </Text>
-                    <Column as="ul" gap="8" paddingTop="8">
-                      {experience.achievements.map(
-                        (achievement: React.ReactNode, i: number) => (
-                          <Text
-                            as="li"
-                            onBackground="neutral-weak"
-                            key={`${experience.company}-${i}`}
-                            style={{ fontSize: "16px", lineHeight: 1.6 }}
-                          >
-                            {achievement}
-                          </Text>
-                        ),
+                    {/* Role + Company + Description */}
+                    <Column flex={5} gap="8">
+                      <Text
+                        variant="heading-strong-l"
+                        style={{ fontSize: "21px", lineHeight: 1.4 }}
+                      >
+                        {experience.role}
+                      </Text>
+                      <Text
+                        onBackground="neutral-weak"
+                        style={{ fontSize: "16px", lineHeight: 1.4 }}
+                      >
+                        {experience.company}
+                      </Text>
+                      <Column as="ul" gap="8" paddingTop="8">
+                        {experience.achievements.map(
+                          (achievement: React.ReactNode, i: number) => (
+                            <Text
+                              as="li"
+                              onBackground="neutral-weak"
+                              key={`${experience.company}-${i}`}
+                              style={{ fontSize: "16px", lineHeight: 1.6 }}
+                            >
+                              {achievement}
+                            </Text>
+                          ),
+                        )}
+                      </Column>
+                      {experience.images && experience.images.length > 0 && (
+                        <Row fillWidth paddingTop="m" gap="12" wrap>
+                          {experience.images.map((image, i) => (
+                            <Row
+                              key={i}
+                              border="neutral-medium"
+                              radius="m"
+                              minWidth={image.width}
+                              height={image.height}
+                            >
+                              <Media
+                                enlarge
+                                radius="m"
+                                sizes={image.width.toString()}
+                                alt={image.alt}
+                                src={image.src}
+                              />
+                            </Row>
+                          ))}
+                        </Row>
                       )}
                     </Column>
-                    {experience.images && experience.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {experience.images.map((image, i) => (
-                          <Row
-                            key={i}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
-                  </Column>
-                </Row>
+                  </Row>
+                </ScrollReveal>
               ))}
             </Column>
           </Row>
@@ -294,33 +306,34 @@ export default function About() {
 
             <Column flex={7} gap="48">
               {about.studies.institutions.map((institution, index) => (
-                <Row
-                  key={`${institution.name}-${index}`}
-                  fillWidth
-                  gap="xl"
-                  s={{ direction: "column" }}
-                >
-                  <Column flex={3} gap="4">
-                    {institution.timeframe && (
-                      <Text
-                        style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
-                      >
-                        {institution.timeframe}
+                <ScrollReveal key={`${institution.name}-${index}`}>
+                  <Row
+                    fillWidth
+                    gap="xl"
+                    s={{ direction: "column" }}
+                  >
+                    <Column flex={3} gap="4">
+                      {institution.timeframe && (
+                        <Text
+                          style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
+                        >
+                          {institution.timeframe}
+                        </Text>
+                      )}
+                    </Column>
+                    <Column flex={5} gap="4">
+                      <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
+                        {institution.name}
                       </Text>
-                    )}
-                  </Column>
-                  <Column flex={5} gap="4">
-                    <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
-                      {institution.name}
-                    </Text>
-                    <Text
-                      onBackground="neutral-weak"
-                      style={{ fontSize: "16px", lineHeight: 1.6 }}
-                    >
-                      {institution.description}
-                    </Text>
-                  </Column>
-                </Row>
+                      <Text
+                        onBackground="neutral-weak"
+                        style={{ fontSize: "16px", lineHeight: 1.6 }}
+                      >
+                        {institution.description}
+                      </Text>
+                    </Column>
+                  </Row>
+                </ScrollReveal>
               ))}
             </Column>
           </Row>
@@ -353,46 +366,47 @@ export default function About() {
 
             <Column flex={7} gap="48">
               {about.technical.skills.map((skill, index) => (
-                <Row
-                  key={`${skill.title}-${index}`}
-                  fillWidth
-                  gap="xl"
-                  s={{ direction: "column" }}
-                >
-                  <Column flex={3} />
-                  <Column flex={5} gap="8">
-                    <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
-                      {skill.title}
-                    </Text>
-                    <Text
-                      onBackground="neutral-weak"
-                      style={{ fontSize: "16px", lineHeight: 1.6 }}
-                    >
-                      {skill.description}
-                    </Text>
-                    {skill.images && skill.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, i) => (
-                          <Row
-                            key={i}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
+                <ScrollReveal key={`${skill.title}-${index}`}>
+                  <Row
+                    fillWidth
+                    gap="xl"
+                    s={{ direction: "column" }}
+                  >
+                    <Column flex={3} />
+                    <Column flex={5} gap="8">
+                      <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
+                        {skill.title}
+                      </Text>
+                      <Text
+                        onBackground="neutral-weak"
+                        style={{ fontSize: "16px", lineHeight: 1.6 }}
+                      >
+                        {skill.description}
+                      </Text>
+                      {skill.images && skill.images.length > 0 && (
+                        <Row fillWidth paddingTop="m" gap="12" wrap>
+                          {skill.images.map((image, i) => (
+                            <Row
+                              key={i}
+                              border="neutral-medium"
                               radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
-                  </Column>
-                </Row>
+                              minWidth={image.width}
+                              height={image.height}
+                            >
+                              <Media
+                                enlarge
+                                radius="m"
+                                sizes={image.width.toString()}
+                                alt={image.alt}
+                                src={image.src}
+                              />
+                            </Row>
+                          ))}
+                        </Row>
+                      )}
+                    </Column>
+                  </Row>
+                </ScrollReveal>
               ))}
             </Column>
           </Row>

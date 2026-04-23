@@ -20,11 +20,16 @@ export const Footer = () => {
           horizontal: "center",
         }}
       >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">{person.name}</Text>
-          <Text onBackground="neutral-weak">/ Startup speed. Product mindset. UX that drives outcomes.</Text>
-        </Text>
+        <Row gap="8" vertical="center">
+          <Text variant="body-default-s" onBackground="neutral-weak">© {currentYear} /</Text>
+          <Text variant="body-default-s" onBackground="neutral-strong" paddingX="4">{person.name}</Text>
+          <img
+            src="/images/estrella-icon.png"
+            alt=""
+            style={{ width: 18, height: 18, filter: "brightness(0.7) saturate(1.8) hue-rotate(-10deg)" }}
+          />
+          <Text variant="body-default-s" onBackground="neutral-weak">Startup speed. Product mindset. UX that drives outcomes.</Text>
+        </Row>
         <Row gap="16">
           {social.map(
             (item) =>

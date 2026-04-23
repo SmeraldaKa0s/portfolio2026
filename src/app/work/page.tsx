@@ -5,7 +5,7 @@ import {
   RevealFx,
 } from "@once-ui-system/core";
 import { Playfair_Display } from "next/font/google";
-import { home, about, person, baseURL } from "@/resources";
+import { home, about, person, baseURL, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
 import { TextRotator } from "@/components/TextRotator";
 import { FloatingStickers } from "@/components/FloatingStickers";
@@ -18,24 +18,24 @@ const playfair = Playfair_Display({
 
 export async function generateMetadata() {
   return Meta.generate({
-    title: home.title,
-    description: home.description,
+    title: work.title,
+    description: work.description,
     baseURL: baseURL,
-    path: home.path,
-    image: home.image,
+    path: work.path,
+    image: `/api/og/generate?title=${encodeURIComponent(work.title)}`,
   });
 }
 
-export default function Home() {
+export default function Work() {
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center" fillWidth>
       <Schema
         as="webPage"
         baseURL={baseURL}
-        path={home.path}
-        title={home.title}
-        description={home.description}
-        image={`/api/og/generate?title=${encodeURIComponent(home.title)}`}
+        path={work.path}
+        title={work.title}
+        description={work.description}
+        image={`/api/og/generate?title=${encodeURIComponent(work.title)}`}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
