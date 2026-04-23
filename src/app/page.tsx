@@ -107,7 +107,7 @@ export default function Home() {
               alignItems: "flex-end",
             }}
           >
-            <RevealFx translateY="6" speed={500} delay={0.55}>
+            <RevealFx translateY="8" speed={500} delay={0.55}>
               <a
                 href={about.path}
                 style={{
@@ -143,7 +143,7 @@ export default function Home() {
               justifyContent: "flex-start",
             }}
           >
-            <RevealFx translateY="6" speed={500} delay={0.4}>
+            <RevealFx translateY="8" speed={500} delay={0.4}>
               <p
                 style={{
                   fontSize: "clamp(16px, 1.25vw, 19px)",
