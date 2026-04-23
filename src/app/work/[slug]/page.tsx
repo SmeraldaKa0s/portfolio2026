@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { getPosts } from "@/utils/utils";
-import { Meta, Schema, Column, Row, Text, Line, Media } from "@once-ui-system/core";
+import { Meta, Schema, Column, Row, Text, Heading, Line, Media } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { ScrollToHash, CustomMDX } from "@/components";
+import { Tilt3D } from "@/components/Tilt3D";
 import { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import styles from "./slug.module.scss";
@@ -113,24 +114,23 @@ export default async function Project({
 
       <Column as="section" maxWidth="m" horizontal="center" gap="l" marginTop="xl" fillWidth>
         {/* Project title */}
-        <Column maxWidth="m" gap="16" paddingBottom="l">
-          <Text
-            as="h1"
-            className={`${playfair.className} ${styles.projectTitle}`}
-          >
+        <Column maxWidth="s" gap="16" horizontal="center" align="center" paddingBottom="l">
+          <Heading variant="display-strong-m" className={playfair.className}>
             {post.metadata.title}
-          </Text>
+          </Heading>
         </Column>
 
         {/* Cover image */}
         {post.metadata.images[0] && (
-          <Media
-            priority
-            aspectRatio="16 / 9"
-            radius="xl"
-            alt=""
-            src={post.metadata.images[0]}
-          />
+          <Tilt3D>
+            <Media
+              priority
+              aspectRatio="16 / 9"
+              radius="xl"
+              alt=""
+              src={post.metadata.images[0]}
+            />
+          </Tilt3D>
         )}
 
         {/* Sections with sticky titles */}
