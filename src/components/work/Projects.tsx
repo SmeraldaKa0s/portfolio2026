@@ -37,8 +37,15 @@ export async function Projects({ range, exclude }: ProjectsProps) {
     : sortedProjects;
 
   return (
-    <Column fillWidth gap="xl" marginBottom="40">
-      <h2 style={{ fontSize: "72px", lineHeight: 1.1, margin: 0, letterSpacing: "-0.02em" }}>
+    <Column fillWidth gap="xl" marginBottom="40" style={{ paddingBottom: "6rem" }}>
+      <h2
+        style={{
+          fontSize: "clamp(44px, 6vw, 72px)",
+          lineHeight: 1.02,
+          margin: 0,
+          letterSpacing: "-0.025em",
+        }}
+      >
         <span
           style={{
             fontFamily: "var(--font-heading)",

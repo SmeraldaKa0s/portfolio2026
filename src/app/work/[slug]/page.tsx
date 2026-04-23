@@ -5,6 +5,7 @@ import { baseURL, about, person, work } from "@/resources";
 import { ScrollToHash, CustomMDX } from "@/components";
 import { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
+import styles from "./slug.module.scss";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -114,9 +115,8 @@ export default async function Project({
         {/* Project title */}
         <Column maxWidth="m" gap="16" paddingBottom="l">
           <Text
-            variant="display-strong-l"
             as="h1"
-            style={{ fontSize: "clamp(32px, 5vw, 48px)", letterSpacing: "-0.02em", lineHeight: 1.1 }}
+            className={`${playfair.className} ${styles.projectTitle}`}
           >
             {post.metadata.title}
           </Text>
@@ -127,7 +127,7 @@ export default async function Project({
           <Media
             priority
             aspectRatio="16 / 9"
-            radius="m"
+            radius="xl"
             alt=""
             src={post.metadata.images[0]}
           />
@@ -147,13 +147,7 @@ export default async function Project({
               >
                 {section.title && (
                   <Text
-                    className={playfair.className}
-                    style={{
-                      fontSize: "34px",
-                      fontStyle: "italic",
-                      fontWeight: 400,
-                      lineHeight: 1.2,
-                    }}
+                    className={`${playfair.className} ${styles.sectionTitle}`}
                   >
                     {section.title}
                   </Text>
