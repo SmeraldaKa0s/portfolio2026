@@ -4,27 +4,87 @@ import { useEffect, useRef, useState } from "react";
 
 interface Sticker {
   src: string;
-  x: number;
-  y: number;
   size: number;
-  orbitRadius: number;
-  orbitSpeed: number;
-  orbitDirection: 1 | -1;
+  sizeSm: number;
+  parallaxAmp: number;
+  orbitKeyframe: string;
+  orbitDuration: number;
+  anchor: {
+    top?: string;
+    right?: string;
+    bottom?: string;
+    left?: string;
+  };
+  scrollVector: { x: number; y: number };
+  hideBelowSm?: boolean;
+  entranceDelay: number;
 }
 
 const stickers: Sticker[] = [
-  { src: "/images/pastilla-2.png", x: 8, y: 25, size: 100, orbitRadius: 12, orbitSpeed: 8, orbitDirection: 1 },
-  { src: "/images/pastilla-3.png", x: 75, y: 15, size: 90, orbitRadius: 10, orbitSpeed: 10, orbitDirection: -1 },
-  { src: "/images/pastilla-1.png", x: 70, y: 65, size: 95, orbitRadius: 14, orbitSpeed: 12, orbitDirection: 1 },
+  {
+    src: "/images/pastilla-2.png",
+    size: 92,
+    sizeSm: 72,
+    parallaxAmp: 10,
+    orbitKeyframe: "sticker-orbit-c",
+    orbitDuration: 12,
+    anchor: { top: "clamp(180px, 30vh, 300px)", left: "calc(64% + 30px)" },
+    scrollVector: { x: -220, y: -140 },
+    hideBelowSm: true,
+    entranceDelay: 720,
+  },
+  {
+    src: "/images/pastilla-3.png",
+    size: 84,
+    sizeSm: 64,
+    parallaxAmp: 10,
+    orbitKeyframe: "sticker-orbit-a",
+    orbitDuration: 11,
+    anchor: { top: "clamp(72px, 14vh, 128px)", right: "calc(clamp(24px, 6vw, 96px) - 30px)" },
+    scrollVector: { x: 180, y: -180 },
+    hideBelowSm: true,
+    entranceDelay: 800,
+  },
+  {
+    src: "/images/pastilla-1.png",
+    size: 104,
+    sizeSm: 84,
+    parallaxAmp: 8,
+    orbitKeyframe: "sticker-orbit-b",
+    orbitDuration: 13,
+    anchor: { top: "clamp(220px, 38vh, 360px)", right: "calc(clamp(16px, 3vw, 48px) - 30px)" },
+    scrollVector: { x: 240, y: 120 },
+    hideBelowSm: false,
+    entranceDelay: 920,
+  },
 ];
 
 export function FloatingStickers() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
+  const [entered, setEntered] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isSmall, setIsSmall] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const s = window.matchMedia("(max-width: 768px)");
+    setPrefersReducedMotion(m.matches);
+    setIsSmall(s.matches);
+    const onM = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    const onS = (e: MediaQueryListEvent) => setIsSmall(e.matches);
+    m.addEventListener("change", onM);
+    s.addEventListener("change", onS);
+    return () => {
+      m.removeEventListener("change", onM);
+      s.removeEventListener("change", onS);
+    };
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || prefersReducedMotion) return;
 
     const handleMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
@@ -36,72 +96,152 @@ export function FloatingStickers() {
 
     el.addEventListener("mousemove", handleMove);
     return () => el.removeEventListener("mousemove", handleMove);
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setEntered(true), 50);
+    return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const handler = () => {
+      const p = Math.min(1, Math.max(0, window.scrollY / 600));
+      setScrollProgress(p);
+    };
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, [prefersReducedMotion]);
 
   return (
     <div
       ref={containerRef}
+      aria-hidden="true"
       style={{
         position: "absolute",
         inset: 0,
         pointerEvents: "none",
         overflow: "hidden",
+        zIndex: 3,
       }}
     >
       {stickers.map((s, i) => {
-        const parallaxX = (mouse.x - 0.5) * (i % 2 === 0 ? 18 : -14);
-        const parallaxY = (mouse.y - 0.5) * (i % 2 === 0 ? -14 : 18);
+        if (isSmall && s.hideBelowSm) return null;
+
+        const size = isSmall ? s.sizeSm : s.size;
+        const px = prefersReducedMotion ? 0 : (mouse.x - 0.5) * (i % 2 === 0 ? s.parallaxAmp : -s.parallaxAmp);
+        const py = prefersReducedMotion ? 0 : (mouse.y - 0.5) * (i % 2 === 0 ? -s.parallaxAmp : s.parallaxAmp);
+        const scrollX = s.scrollVector.x * scrollProgress;
+        const scrollY = s.scrollVector.y * scrollProgress;
+        const scrollBlur = scrollProgress * 14;
+        const scrollOpacity = 1 - scrollProgress;
+
+        const scale = entered ? 1 : 0.72;
+        const opacity = entered ? scrollOpacity : 0;
+
+        const entranceDelay = prefersReducedMotion ? 0 : s.entranceDelay;
+        const entranceDuration = prefersReducedMotion ? 200 : 680;
 
         return (
           <div
             key={s.src}
+            className="sticker-hover"
             style={{
               position: "absolute",
-              left: `${s.x}%`,
-              top: `${s.y}%`,
-              width: s.size,
-              height: s.size,
-              transform: `translate(${parallaxX}px, ${parallaxY}px)`,
-              transition: "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-              animation: `sticker-orbit-${i} ${s.orbitSpeed}s linear infinite`,
+              ...s.anchor,
+              width: size,
+              height: size,
+              opacity,
+              transform: `scale(${scale})`,
+              transition: `
+                opacity ${entranceDuration}ms cubic-bezier(0.22, 1, 0.36, 1) ${entranceDelay}ms,
+                transform ${entranceDuration}ms cubic-bezier(0.22, 1, 0.36, 1) ${entranceDelay}ms
+              `,
+              willChange: "transform, opacity",
               pointerEvents: "auto",
+              perspective: "700px",
             }}
           >
-            <img
-              src={s.src}
-              alt=""
+            <div
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
-                userSelect: "none",
-                pointerEvents: "none",
+                animation: prefersReducedMotion
+                  ? undefined
+                  : `${s.orbitKeyframe} ${s.orbitDuration}s ease-in-out infinite`,
+                animationDelay: prefersReducedMotion ? undefined : `${entranceDelay + 500}ms`,
+                willChange: "transform",
               }}
-            />
+            >
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  transform: `translate(${px + scrollX}px, ${py + scrollY}px)`,
+                  filter: scrollBlur > 0 ? `blur(${scrollBlur}px)` : undefined,
+                  transition: "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  willChange: "transform, filter",
+                }}
+              >
+                <div
+                  className="sticker-flip"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  <img
+                    src={s.src}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      userSelect: "none",
+                      pointerEvents: "none",
+                      backfaceVisibility: "visible",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         );
       })}
       <style>{`
-        @keyframes sticker-orbit-0 {
-          0%   { transform: translate(0px, 0px); }
-          25%  { transform: translate(${stickers[0].orbitRadius}px, ${stickers[0].orbitRadius * 0.7}px); }
-          50%  { transform: translate(0px, ${stickers[0].orbitRadius}px); }
-          75%  { transform: translate(-${stickers[0].orbitRadius}px, ${stickers[0].orbitRadius * 0.3}px); }
-          100% { transform: translate(0px, 0px); }
+        @keyframes sticker-orbit-a {
+          0%,100% { transform: translate(0, 0) rotate(0deg); }
+          25%     { transform: translate(8px, 6px) rotate(1.5deg); }
+          50%     { transform: translate(4px, 12px) rotate(-0.5deg); }
+          75%     { transform: translate(-6px, 4px) rotate(-1.5deg); }
         }
-        @keyframes sticker-orbit-1 {
-          0%   { transform: translate(0px, 0px); }
-          25%  { transform: translate(-${stickers[1].orbitRadius}px, ${stickers[1].orbitRadius * 0.6}px); }
-          50%  { transform: translate(0px, -${stickers[1].orbitRadius}px); }
-          75%  { transform: translate(${stickers[1].orbitRadius}px, -${stickers[1].orbitRadius * 0.4}px); }
-          100% { transform: translate(0px, 0px); }
+        @keyframes sticker-orbit-b {
+          0%,100% { transform: translate(0, 0) rotate(0deg); }
+          25%     { transform: translate(-6px, -8px) rotate(-1.2deg); }
+          50%     { transform: translate(-10px, 2px) rotate(1deg); }
+          75%     { transform: translate(-4px, 8px) rotate(1.8deg); }
         }
-        @keyframes sticker-orbit-2 {
-          0%   { transform: translate(0px, 0px); }
-          25%  { transform: translate(${stickers[2].orbitRadius * 0.8}px, -${stickers[2].orbitRadius}px); }
-          50%  { transform: translate(-${stickers[2].orbitRadius * 0.5}px, 0px); }
-          75%  { transform: translate(-${stickers[2].orbitRadius}px, ${stickers[2].orbitRadius * 0.7}px); }
-          100% { transform: translate(0px, 0px); }
+        @keyframes sticker-orbit-c {
+          0%,100% { transform: translate(0, 0) rotate(0deg); }
+          25%     { transform: translate(5px, -7px) rotate(2deg); }
+          50%     { transform: translate(9px, 3px) rotate(-0.8deg); }
+          75%     { transform: translate(2px, 9px) rotate(-2deg); }
+        }
+        .sticker-flip {
+          transform: rotateY(0deg);
+          transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .sticker-hover:hover .sticker-flip {
+          transform: rotateY(360deg);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .sticker-flip,
+          .sticker-hover:hover .sticker-flip {
+            transition: none;
+            transform: none;
+          }
         }
       `}</style>
     </div>

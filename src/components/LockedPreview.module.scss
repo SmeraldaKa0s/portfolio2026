@@ -9,14 +9,25 @@
 
 .media {
   position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-m);
+}
+
+.mediaBlur > :global(*) {
+  overflow: visible !important;
+  border-radius: 0 !important;
 }
 
 .mediaBlur :global(img),
 .mediaBlur :global(video) {
-  filter: blur(16px) saturate(0.7);
-  transform: scale(1.05);
+  filter: blur(22px) saturate(0.45) brightness(0.32);
+  transform: scale(0.94);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, black 22%, black 78%, transparent),
+    linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, black 22%, black 78%, transparent),
+    linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  mask-composite: intersect;
 }
 
 .lockOverlay {

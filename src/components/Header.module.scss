@@ -42,11 +42,11 @@
 }
 
 // ——— Left: Name + Role ———
-.left {
+a.left {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: inherit;
+  color: var(--neutral-on-background-strong);
   flex-shrink: 0;
   gap: 0;
   line-height: 1.3;
@@ -60,7 +60,8 @@
 
 .role {
   font-size: 0.75rem;
-  color: var(--neutral-on-background-weak);
+  color: var(--neutral-on-background-strong);
+  opacity: 0.6;
 }
 
 // ——— Center: Desktop navigation pill ———
@@ -84,24 +85,25 @@
   background: var(--neutral-alpha-weak);
 }
 
-.navItem {
+a.navItem {
   position: relative;
   padding: 0.5rem 1.25rem;
   border-radius: 999px;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: var(--neutral-on-background-weak);
+  color: var(--neutral-on-background-strong);
+  opacity: 0.6;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
 
   &:hover {
-    color: var(--neutral-on-background-strong);
+    opacity: 1;
   }
 
   &.active {
     background: var(--page-background);
-    color: var(--neutral-on-background-strong);
+    opacity: 1;
     font-weight: 600;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   }
@@ -128,19 +130,20 @@
 }
 
 .cta,
-.ctaLink {
+a.ctaLink {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.8125rem;
   font-weight: 400;
-  color: var(--neutral-on-background-weak);
+  color: var(--neutral-on-background-strong);
+  opacity: 0.6;
   text-decoration: none;
   white-space: nowrap;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    color: var(--neutral-on-background-strong);
+    opacity: 1;
   }
 }
 
@@ -197,17 +200,18 @@
   gap: 1.5rem;
 }
 
-.mobileNavItem {
+a.mobileNavItem {
   font-size: clamp(2.5rem, 8vw, 4rem);
   text-decoration: none;
-  color: var(--neutral-on-background-weak);
+  color: var(--neutral-on-background-strong);
+  opacity: 0.6;
   font-weight: 300;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 
   &:hover {
-    color: var(--neutral-on-background-strong);
+    opacity: 1;
   }
 }
 

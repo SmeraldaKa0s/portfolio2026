@@ -41,3 +41,231 @@
 .arrowIcon {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ——— Editorial treatment ——— */
+
+.sectionNumber {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  opacity: 0.65;
+}
+
+.sectionTitle {
+  font-size: clamp(44px, 5.5vw, 64px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  opacity: 0.7;
+}
+
+.timeframe {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+.leadParagraph {
+  &::first-letter {
+    font-size: 4.8em;
+    line-height: 0.85;
+    float: left;
+    padding: 0.04em 0.12em 0 0;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--neutral-on-background-strong);
+  }
+}
+
+.pullquote {
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.25;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--neutral-on-background-strong);
+  border-left: 1px solid var(--neutral-border-medium);
+  padding-left: 24px;
+  margin: 16px 0;
+}
+
+/* ——— Intro masthead (gazette style) ——— */
+
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  opacity: 0.72;
+}
+
+.mastheadNo {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.mastheadDots {
+  flex: 1;
+  height: 1px;
+  background-image: radial-gradient(circle, currentColor 0.6px, transparent 0.7px);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.6;
+}
+
+.mastheadLabel {
+  flex-shrink: 0;
+}
+
+.introLead {
+  font-size: clamp(22px, 2vw, 26px) !important;
+  line-height: 1.5 !important;
+  position: relative;
+
+  letter-spacing: -0.005em;
+
+  /* ——— Scroll-driven choreography: opacity + slight lift (no letter-spacing to avoid reflow) ——— */
+  opacity: calc(1 - var(--hero-progress, 0) * 0.55);
+  translate: 0 calc(var(--hero-progress, 0) * -14px);
+  will-change: opacity, translate;
+
+  :global(.intro-hello) {
+    font-style: italic;
+    color: var(--neutral-on-background-strong);
+  }
+
+  :global(.intro-name) {
+    font-style: italic;
+    color: var(--neutral-on-background-strong);
+  }
+
+  :global(em) {
+    font-style: italic;
+    color: var(--neutral-on-background-strong);
+  }
+
+  :global(em.intro-mark) {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(
+      105deg,
+      transparent 0.4%,
+      var(--scheme-brand-600-30, rgba(130, 80, 200, 0.32)) 1.2%,
+      var(--scheme-brand-600-30, rgba(130, 80, 200, 0.32)) 98.8%,
+      transparent 99.6%
+    );
+    background-repeat: no-repeat;
+    background-position: 0 78%;
+    padding: 0 4px;
+    margin: 0 -2px;
+
+    /* ——— Scroll-driven: highlighter "se destiñe" desde abajo ——— */
+    background-size: 100% max(0%, calc(58% - var(--hero-progress, 0) * 80%));
+    will-change: background-size;
+  }
+
+  :global(.intro-fleuron) {
+    display: block;
+    margin-top: 32px;
+    font-size: 22px;
+    font-style: normal;
+    line-height: 1;
+    color: var(--scheme-brand-700, var(--neutral-on-background-weak));
+    letter-spacing: 0.4em;
+
+    /* ——— Scroll-driven: fleurón flota hacia arriba y se va ——— */
+    opacity: calc(0.55 * max(0, 1 - var(--hero-progress, 0) * 1.6));
+    translate: 0 calc(var(--hero-progress, 0) * -48px);
+    will-change: opacity, translate;
+  }
+}
+
+/* ——— Scroll-driven CTA fade ——— */
+.storyLink {
+  opacity: calc(1 - var(--hero-progress, 0) * 0.85);
+  translate: 0 calc(var(--hero-progress, 0) * -12px);
+  will-change: opacity, translate;
+}
+
+/* ——— Avatar frame: object-fit + scroll-driven filter on the img ——— */
+.avatarFrame {
+  :global(img) {
+    object-fit: contain !important;
+    filter:
+      brightness(calc(1 - var(--hero-progress, 0) * 0.55))
+      contrast(calc(1 + var(--hero-progress, 0) * 0.25))
+      blur(calc(var(--hero-progress, 0) * 2.5px));
+    will-change: filter;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .introLead,
+  .storyLink {
+    opacity: 1 !important;
+    translate: 0 !important;
+  }
+  :global(em.intro-mark) {
+    background-size: 100% 58% !important;
+  }
+  :global(.intro-fleuron) {
+    opacity: 0.55 !important;
+    translate: 0 !important;
+  }
+  .avatarFrame :global(img) {
+    filter: none !important;
+  }
+}
+
+.tagline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  padding-top: 14px;
+  margin-top: 4px;
+  border-top: 1px solid var(--neutral-border-medium);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+}
+
+.taglineDot {
+  opacity: 0.4;
+  font-size: 8px;
+  transform: translateY(-1px);
+}
+
+.signature {
+  font-size: clamp(28px, 3vw, 38px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--neutral-on-background-strong);
+  margin-top: 8px;
+  letter-spacing: -0.02em;
+}

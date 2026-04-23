@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface TextRotatorProps {
   words: string[];
   interval?: number;
   className?: string;
   style?: React.CSSProperties;
+  onWidthChange?: (width: number) => void;
 }
 
 export function TextRotator({
@@ -14,10 +15,12 @@ export function TextRotator({
   interval = 2500,
   className,
   style,
+  onWidthChange,
 }: TextRotatorProps) {
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<"visible" | "exiting" | "entering">("visible");
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const measureRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
@@ -36,6 +39,20 @@ export function TextRotator({
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [index, phase, words.length, interval]);
 
+  useLayoutEffect(() => {
+    if (!onWidthChange || !measureRef.current) return;
+    const el = measureRef.current;
+    const emit = () => onWidthChange(el.getBoundingClientRect().width);
+    emit();
+    const ro = new ResizeObserver(emit);
+    ro.observe(el);
+    window.addEventListener("resize", emit);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", emit);
+    };
+  }, [index, onWidthChange]);
+
   const transform =
     phase === "exiting"
       ? "translateY(-100%)"
@@ -52,10 +69,12 @@ export function TextRotator({
         overflow: "hidden",
         verticalAlign: "bottom",
         height: "1.15em",
+        position: "relative",
         ...style,
       }}
     >
       <span
+        ref={measureRef}
         className={className}
         style={{
           display: "inline-block",

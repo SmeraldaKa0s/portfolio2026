@@ -6,7 +6,7 @@ const person: Person = {
   lastName: "",
   name: `Alexandra`,
   role: "Product designer",
-  avatar: "/images/alexandra-image-portfolio.png",
+  avatar: "/images/alexandra-ascii.webp",
   email: "alek.xandra.lerner@gmail.com",
   location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: [], // optional: Leave the array empty if you don't want to display languages
@@ -73,7 +73,7 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Hello, My name is Alexandra, and I design products that work for everyone—the people who use them, the ones who build them—creating experiences that actually matter.
+        <em className="intro-hello">Hello,</em> My name is <span className="intro-name">Alexandra</span>, and I design products that work for everyone—<em>the people who use them</em>, <em>the ones who build them</em>—creating experiences that <em className="intro-mark">actually matter</em>.
       </>
     ),
   },

@@ -4,13 +4,16 @@ import {
   Meta,
   RevealFx,
 } from "@once-ui-system/core";
-import { Playfair_Display } from "next/font/google";
+import { Gloock } from "next/font/google";
 import { home, about, person, baseURL } from "@/resources";
 import { Projects } from "@/components/work/Projects";
-import { TextRotator } from "@/components/TextRotator";
+import { HeroHeadline } from "@/components/HeroHeadline";
+import { HeroWatermark } from "@/components/HeroWatermark";
 import { FloatingStickers } from "@/components/FloatingStickers";
+import { GrainOverlay } from "@/components/GrainOverlay";
 
-const playfair = Playfair_Display({
+const gloock = Gloock({
+  variable: "--font-display",
   subsets: ["latin"],
   weight: ["400"],
   display: "swap",
@@ -43,88 +46,124 @@ export default function Home() {
         }}
       />
 
-      {/* Hero with text rotator + floating stickers */}
-      <Column
-        fillWidth
-        horizontal="center"
-        vertical="center"
+      <section
+        className={gloock.variable}
+        aria-labelledby="hero-heading"
         style={{
-          minHeight: "100vh",
           position: "relative",
+          width: "100%",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "clamp(28px, 4.5vh, 56px)",
+          paddingTop: "clamp(72px, 11vh, 128px)",
+          paddingBottom: "clamp(40px, 7vh, 80px)",
+          overflow: "hidden",
+          isolation: "isolate",
         }}
       >
+        <HeroWatermark character="A" />
         <FloatingStickers />
+        <GrainOverlay opacity={0.04} blendMode="overlay" zIndex={1} />
 
-        <Column
-          gap="24"
-          horizontal="center"
-          style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: "600px" }}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            display: "grid",
+            gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
+            gap: "clamp(20px, 3vw, 40px)",
+            alignItems: "end",
+          }}
         >
-          <RevealFx translateY="4" speed={400}>
-            <h1
-              style={{
-                fontSize: "clamp(48px, 8vw, 80px)",
-                fontWeight: 500,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-                margin: 0,
-                fontFamily: "var(--font-heading)",
-                color: "var(--neutral-on-background-strong)",
-              }}
-            >
-              <TextRotator
-                words={["Product Designer", "IA Designer", "UX/UI Designer"]}
-                interval={2500}
-              />
-            </h1>
-          </RevealFx>
+          <div style={{ gridColumn: "1 / -1" }}>
+            <RevealFx translateY="8" speed={600} delay={0.15}>
+              <div id="hero-heading">
+                <HeroHeadline
+                  anchorWord="Designer"
+                  rotatingWords={["Product", "IA", "UX/UI"]}
+                />
+              </div>
+            </RevealFx>
+          </div>
+        </div>
 
-          <RevealFx translateY="8" speed={400} delay={0.08}>
-            <p
-              className={playfair.className}
-              style={{
-                fontSize: "clamp(16px, 2.2vw, 20px)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                lineHeight: 1.5,
-                color: "var(--neutral-on-background-weak)",
-                margin: 0,
-                maxWidth: "480px",
-              }}
-            >
-              Designing products that give you competitive advantage combining human-centered strategy, data, and AI.
-            </p>
-          </RevealFx>
-
-          <RevealFx translateY="8" speed={400} delay={0.12}>
-            <a
-              href={about.path}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.625rem",
-                fontSize: "1.125rem",
-                color: "var(--neutral-on-background-strong)",
-                textDecoration: "none",
-              }}
-            >
-              <span
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            display: "grid",
+            gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
+            gap: "clamp(20px, 3vw, 40px)",
+            alignItems: "end",
+            marginTop: "clamp(24px, 4vh, 56px)",
+          }}
+        >
+          <div
+            style={{
+              gridColumn: "1 / span 6",
+              display: "flex",
+              alignItems: "flex-end",
+            }}
+          >
+            <RevealFx translateY="6" speed={500} delay={0.55}>
+              <a
+                href={about.path}
                 style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: "50%",
-                  background: "var(--neutral-on-background-strong)",
-                  display: "inline-block",
-                  flexShrink: 0,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.625rem",
+                  fontSize: "1rem",
+                  color: "var(--neutral-on-background-strong)",
+                  textDecoration: "none",
+                  fontFamily: "var(--font-body)",
+                  letterSpacing: "-0.005em",
                 }}
-              />
-              Read my story
-            </a>
-          </RevealFx>
-        </Column>
-      </Column>
+              >
+                <span
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    background: "var(--neutral-on-background-strong)",
+                    display: "inline-block",
+                    flexShrink: 0,
+                  }}
+                />
+                Read my story
+              </a>
+            </RevealFx>
+          </div>
 
-      {/* All Projects */}
+          <div
+            style={{
+              gridColumn: "7 / -1",
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <RevealFx translateY="6" speed={500} delay={0.4}>
+              <p
+                style={{
+                  fontSize: "clamp(16px, 1.25vw, 19px)",
+                  fontWeight: 400,
+                  fontStyle: "normal",
+                  lineHeight: 1.55,
+                  color: "var(--neutral-on-background-weak)",
+                  margin: 0,
+                  maxWidth: "38ch",
+                  fontFamily: "var(--font-body)",
+                  letterSpacing: "-0.003em",
+                }}
+              >
+                Designing products that give you competitive advantage combining human-centered strategy, data, and AI.
+              </p>
+            </RevealFx>
+          </div>
+        </div>
+      </section>
+
       <RevealFx translateY="16" speed={400} delay={0.16} fillWidth>
         <Projects />
       </RevealFx>

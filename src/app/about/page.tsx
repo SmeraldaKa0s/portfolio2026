@@ -14,6 +14,8 @@ import { Playfair_Display } from "next/font/google";
 import { baseURL, about, person } from "@/resources";
 import React from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { FloatingAvatar } from "@/components/about/FloatingAvatar";
+import { HeroScrollProgress } from "@/components/about/HeroScrollProgress";
 import styles from "./about.module.scss";
 
 const playfair = Playfair_Display({
@@ -35,6 +37,7 @@ export async function generateMetadata() {
 export default function About() {
   return (
     <Column maxWidth="m" fillWidth>
+      <HeroScrollProgress />
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -65,24 +68,13 @@ export default function About() {
           style={{ justifyContent: "flex-end", paddingBottom: "80px" }}
         >
           <RevealFx translateY="4" speed={400}>
-            <Column gap="16">
-              <Text
-                variant="heading-default-l"
-                onBackground="neutral-weak"
-                className={playfair.className}
-                style={{ fontSize: "21px", lineHeight: 1.5 }}
-              >
-                {about.intro.description}
-              </Text>
-              <Text
-                variant="heading-default-l"
-                onBackground="neutral-weak"
-                className={playfair.className}
-                style={{ fontSize: "21px", lineHeight: 1.5 }}
-              >
-                Startup speed. Product mindset. UX that drives outcomes.
-              </Text>
-            </Column>
+            <Text
+              variant="heading-default-l"
+              onBackground="neutral-weak"
+              className={`${playfair.className} ${styles.introLead}`}
+            >
+              {about.intro.description}
+            </Text>
           </RevealFx>
           <RevealFx translateY="8" speed={400} delay={0.08}>
             <a
@@ -105,19 +97,13 @@ export default function About() {
             vertical="center"
           >
             <RevealFx translateY="8" speed={400} delay={0.12}>
-              <div style={{ width: 590, maxWidth: "100%", height: 665, position: "relative" }}>
-                <Media
-                  radius="l"
-                  alt={person.name}
-                  src={person.avatar}
-                  sizes="590px"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              </div>
+              <FloatingAvatar
+                src={person.avatar}
+                alt={person.name}
+                width={590}
+                height={665}
+                maxRotation={-20}
+              />
             </RevealFx>
           </Column>
         )}
@@ -130,18 +116,13 @@ export default function About() {
             <Column flex={4} s={{ hide: true }} />
             <Column flex={6} gap="xl">
               <Column gap="m">
-                <Text
-                  variant="display-default-xs"
-                  onBackground="neutral-weak"
-                  className={playfair.className}
-                  style={{ fontStyle: "italic" }}
-                >
-                  tldr:
+                <Text className={styles.eyebrow}>
+                  tldr
                 </Text>
                 <Heading
                   as="h2"
                   variant="display-strong-l"
-                  className={playfair.className}
+                  className={`${playfair.className} ${styles.sectionTitle}`}
                 >
                   From libraries to interfaces
                 </Heading>
@@ -149,7 +130,11 @@ export default function About() {
 
               <Column gap="l">
                 <ScrollReveal>
-                  <Text onBackground="neutral-weak" variant="body-default-l">
+                  <Text
+                    onBackground="neutral-weak"
+                    variant="body-default-l"
+                    className={styles.leadParagraph}
+                  >
                     My path to design wasn't direct. It started in libraries, where I learned that information only matters when someone can actually find it. That idea — that structure and context decide whether something is useful or just noise — became the through-line of everything I've done since.
                   </Text>
                 </ScrollReveal>
@@ -165,7 +150,15 @@ export default function About() {
                 </ScrollReveal>
                 <ScrollReveal delay={0.15}>
                   <Text onBackground="neutral-weak" variant="body-default-l">
-                    Right now I'm focused on what I believe is the most interesting shift in our field: how AI is changing the way we design and build products. I work with a design-to-code flow using Claude Code, moving from intent to production with rapid iteration and measurement built in from day one. I don't think AI replaces craft — I think it raises the bar for where craft matters. Good taste without accountability is just decoration. Good taste with accountability is leadership.
+                    Right now I'm focused on what I believe is the most interesting shift in our field: how AI is changing the way we design and build products. I work with a design-to-code flow using Claude Code, moving from intent to production with rapid iteration and measurement built in from day one. I don't think AI replaces craft — I think it raises the bar for where craft matters.
+                  </Text>
+                </ScrollReveal>
+                <ScrollReveal delay={0.17}>
+                  <Text
+                    as="blockquote"
+                    className={`${playfair.className} ${styles.pullquote}`}
+                  >
+                    Good taste without accountability is just decoration. Good taste with accountability is leadership.
                   </Text>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2}>
@@ -190,17 +183,11 @@ export default function About() {
               flex={3}
               style={{ position: "sticky", top: 100, alignSelf: "flex-start", marginTop: "-10px" }}
               s={{ style: { position: "relative", top: "auto" } }}
+              gap="12"
             >
-              <Text
-                className={playfair.className}
-                style={{
-                  fontSize: "34px",
-                  fontStyle: "italic",
-                  fontWeight: 400,
-                  lineHeight: 1.2,
-                }}
-              >
-                Experience
+              <Text className={styles.sectionNumber}>01 — Experience</Text>
+              <Text className={`${playfair.className} ${styles.sectionTitle}`}>
+                Where I've worked
               </Text>
             </Column>
 
@@ -215,9 +202,7 @@ export default function About() {
                   >
                     {/* Timeframe */}
                     <Column flex={3} gap="4">
-                      <Text
-                        style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
-                      >
+                      <Text className={styles.timeframe}>
                         {experience.timeframe}
                       </Text>
                     </Column>
@@ -290,17 +275,11 @@ export default function About() {
               flex={3}
               style={{ position: "sticky", top: 100, alignSelf: "flex-start", marginTop: "-10px" }}
               s={{ style: { position: "relative", top: "auto" } }}
+              gap="12"
             >
-              <Text
-                className={playfair.className}
-                style={{
-                  fontSize: "34px",
-                  fontStyle: "italic",
-                  fontWeight: 400,
-                  lineHeight: 1.2,
-                }}
-              >
-                Education
+              <Text className={styles.sectionNumber}>02 — Education</Text>
+              <Text className={`${playfair.className} ${styles.sectionTitle}`}>
+                What I studied
               </Text>
             </Column>
 
@@ -314,15 +293,16 @@ export default function About() {
                   >
                     <Column flex={3} gap="4">
                       {institution.timeframe && (
-                        <Text
-                          style={{ fontSize: "16px", lineHeight: 1.4, color: "var(--neutral-on-background-weak)", opacity: 0.5 }}
-                        >
+                        <Text className={styles.timeframe}>
                           {institution.timeframe}
                         </Text>
                       )}
                     </Column>
                     <Column flex={5} gap="4">
-                      <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
+                      <Text
+                        variant="heading-strong-l"
+                        style={{ fontSize: "21px", lineHeight: 1.4 }}
+                      >
                         {institution.name}
                       </Text>
                       <Text
@@ -350,17 +330,11 @@ export default function About() {
               flex={3}
               style={{ position: "sticky", top: 100, alignSelf: "flex-start", marginTop: "-10px" }}
               s={{ style: { position: "relative", top: "auto" } }}
+              gap="12"
             >
-              <Text
-                className={playfair.className}
-                style={{
-                  fontSize: "34px",
-                  fontStyle: "italic",
-                  fontWeight: 400,
-                  lineHeight: 1.2,
-                }}
-              >
-                Technical skills
+              <Text className={styles.sectionNumber}>03 — Craft</Text>
+              <Text className={`${playfair.className} ${styles.sectionTitle}`}>
+                Tools &amp; skills
               </Text>
             </Column>
 
@@ -374,7 +348,10 @@ export default function About() {
                   >
                     <Column flex={3} />
                     <Column flex={5} gap="8">
-                      <Text style={{ fontSize: "21px", fontWeight: 600, lineHeight: 1.4 }}>
+                      <Text
+                        variant="heading-strong-l"
+                        style={{ fontSize: "21px", lineHeight: 1.4 }}
+                      >
                         {skill.title}
                       </Text>
                       <Text
