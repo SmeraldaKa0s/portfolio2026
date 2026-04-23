@@ -11,6 +11,7 @@ import { HeroHeadline } from "@/components/HeroHeadline";
 import { HeroWatermark } from "@/components/HeroWatermark";
 import { FloatingStickers } from "@/components/FloatingStickers";
 import { GrainOverlay } from "@/components/GrainOverlay";
+import homeStyles from "./home.module.scss";
 
 const gloock = Gloock({
   variable: "--font-display",
@@ -89,24 +90,28 @@ export default function Home() {
           </div>
         </div>
 
-        <div
-          style={{
-            position: "relative",
-            zIndex: 2,
-            display: "grid",
-            gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
-            gap: "clamp(20px, 3vw, 40px)",
-            alignItems: "end",
-            marginTop: "clamp(24px, 4vh, 56px)",
-          }}
-        >
-          <div
-            style={{
-              gridColumn: "1 / span 6",
-              display: "flex",
-              alignItems: "flex-end",
-            }}
-          >
+        <div className={homeStyles.heroSubGrid}>
+          <div className={homeStyles.heroSubSpacer} />
+
+          <div className={homeStyles.heroSubContent}>
+            <RevealFx translateY="8" speed={500} delay={0.4}>
+              <p
+                style={{
+                  fontSize: "clamp(15px, 1.5vw, 19px)",
+                  fontWeight: 400,
+                  fontStyle: "normal",
+                  lineHeight: 1.55,
+                  color: "var(--neutral-on-background-weak)",
+                  margin: 0,
+                  maxWidth: "38ch",
+                  fontFamily: "var(--font-body)",
+                  letterSpacing: "-0.003em",
+                }}
+              >
+                Designing products that give you competitive advantage combining human-centered strategy, data, and AI.
+              </p>
+            </RevealFx>
+
             <RevealFx translateY="8" speed={500} delay={0.55}>
               <a
                 href={about.path}
@@ -133,32 +138,6 @@ export default function Home() {
                 />
                 Read my story
               </a>
-            </RevealFx>
-          </div>
-
-          <div
-            style={{
-              gridColumn: "7 / -1",
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-          >
-            <RevealFx translateY="8" speed={500} delay={0.4}>
-              <p
-                style={{
-                  fontSize: "clamp(16px, 1.25vw, 19px)",
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                  lineHeight: 1.55,
-                  color: "var(--neutral-on-background-weak)",
-                  margin: 0,
-                  maxWidth: "38ch",
-                  fontFamily: "var(--font-body)",
-                  letterSpacing: "-0.003em",
-                }}
-              >
-                Designing products that give you competitive advantage combining human-centered strategy, data, and AI.
-              </p>
             </RevealFx>
           </div>
         </div>

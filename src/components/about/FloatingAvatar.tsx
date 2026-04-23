@@ -85,7 +85,8 @@ export function FloatingAvatar({
       style={{
         width,
         maxWidth: "100%",
-        height,
+        height: "auto",
+        aspectRatio: `${width} / ${height}`,
         perspective: "1200px",
       }}
     >

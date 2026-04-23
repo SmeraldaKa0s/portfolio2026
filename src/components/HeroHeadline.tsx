@@ -33,15 +33,25 @@ export function HeroHeadline({ anchorWord, rotatingWords, className }: HeroHeadl
     return () => window.removeEventListener("scroll", handler);
   }, [prefersReducedMotion]);
 
-  const scrollOffset = progress * 200;
-  const blurAmount = progress * 14;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const scrollOffset = progress * (isMobile ? 60 : 200);
+  const blurAmount = progress * (isMobile ? 6 : 14);
   const fadeOpacity = 1 - progress;
 
   return (
     <h1
       className={className}
       style={{
-        fontSize: "clamp(52px, 11.5vw, 176px)",
+        fontSize: "clamp(58px, 11.5vw, 176px)",
         fontWeight: 400,
         lineHeight: 0.94,
         letterSpacing: "-0.035em",

@@ -58,14 +58,12 @@ export default function About() {
         gap="xl"
         paddingY="xl"
         s={{ direction: "column" }}
-        style={{ minHeight: "85vh", alignItems: "end" }}
+        style={{ minHeight: "100vh", alignItems: "center", paddingTop: "clamp(72px, 11vh, 128px)" }}
       >
-        {/* Left: intro text + CTA — aligned to bottom */}
+        {/* Left: intro text + CTA */}
         <Column
           flex={5}
           gap="32"
-          vertical="end"
-          style={{ justifyContent: "flex-end", paddingBottom: "80px" }}
         >
           <RevealFx translateY="4" speed={400}>
             <Text
@@ -211,7 +209,7 @@ export default function About() {
                     <Column flex={5} gap="8">
                       <Text
                         variant="heading-strong-l"
-                        style={{ fontSize: "21px", lineHeight: 1.4 }}
+                        style={{ fontSize: "clamp(18px, 2.5vw, 21px)", lineHeight: 1.4 }}
                       >
                         {experience.role}
                       </Text>
@@ -242,7 +240,7 @@ export default function About() {
                               key={i}
                               border="neutral-medium"
                               radius="m"
-                              minWidth={image.width}
+                              style={{ minWidth: Math.min(image.width, 280), maxWidth: "100%" }}
                               height={image.height}
                             >
                               <Media
@@ -301,7 +299,7 @@ export default function About() {
                     <Column flex={5} gap="4">
                       <Text
                         variant="heading-strong-l"
-                        style={{ fontSize: "21px", lineHeight: 1.4 }}
+                        style={{ fontSize: "clamp(18px, 2.5vw, 21px)", lineHeight: 1.4 }}
                       >
                         {institution.name}
                       </Text>
@@ -350,7 +348,7 @@ export default function About() {
                     <Column flex={5} gap="8">
                       <Text
                         variant="heading-strong-l"
-                        style={{ fontSize: "21px", lineHeight: 1.4 }}
+                        style={{ fontSize: "clamp(18px, 2.5vw, 21px)", lineHeight: 1.4 }}
                       >
                         {skill.title}
                       </Text>
@@ -367,7 +365,7 @@ export default function About() {
                               key={i}
                               border="neutral-medium"
                               radius="m"
-                              minWidth={image.width}
+                              style={{ minWidth: Math.min(image.width, 280), maxWidth: "100%" }}
                               height={image.height}
                             >
                               <Media

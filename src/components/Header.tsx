@@ -4,8 +4,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
+import { Gloock } from "next/font/google";
 import { routes, person, about, work, blog, gallery } from "@/resources";
 import styles from "./Header.module.scss";
+
+const gloock = Gloock({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
@@ -162,7 +169,7 @@ export const Header = () => {
             <Link
               key={item.href}
               href={item.href}
-              className={`${styles.mobileNavItem} ${
+              className={`${gloock.className} ${styles.mobileNavItem} ${
                 isActive(item.href) ? styles.mobileActive : ""
               }`}
               onClick={() => setMobileMenuOpen(false)}
@@ -172,7 +179,7 @@ export const Header = () => {
           ))}
           <a
             href={calendarLink}
-            className={styles.mobileNavItem}
+            className={`${gloock.className} ${styles.mobileNavItem}`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMobileMenuOpen(false)}

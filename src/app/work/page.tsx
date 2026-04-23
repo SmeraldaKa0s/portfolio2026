@@ -58,7 +58,7 @@ export default function Work() {
         <Column
           gap="24"
           horizontal="center"
-          style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: "600px" }}
+          style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: "600px", padding: "0 16px" }}
         >
           <RevealFx translateY="4" speed={400}>
             <h1

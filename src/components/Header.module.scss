@@ -197,27 +197,28 @@ a.ctaLink {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
 a.mobileNavItem {
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-size: clamp(2rem, 7vw, 3rem);
   text-decoration: none;
   color: var(--neutral-on-background-strong);
-  opacity: 0.6;
-  font-weight: 300;
-  letter-spacing: -0.02em;
+  opacity: 0.35;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.2;
   transition: opacity 0.2s ease;
 
   &:hover {
-    opacity: 1;
+    opacity: 0.7;
   }
 }
 
-.mobileActive {
+a.mobileNavItem.mobileActive {
   color: var(--neutral-on-background-strong);
-  font-weight: 600;
+  opacity: 1;
+  font-weight: 400;
 }
 
 // ——— Mobile breakpoint ———

@@ -149,7 +149,7 @@ export default async function Project({
                   <Text
                     className={playfair.className}
                     style={{
-                      fontSize: "34px",
+                      fontSize: "clamp(24px, 4vw, 34px)",
                       fontStyle: "italic",
                       fontWeight: 400,
                       lineHeight: 1.2,

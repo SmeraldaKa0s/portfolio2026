@@ -10,6 +10,7 @@
 @media (max-width: breakpoints.$s) {
   .grid {
     grid-template-columns: 1fr;
+    gap: var(--static-space-48, 48px);
   }
 }
 

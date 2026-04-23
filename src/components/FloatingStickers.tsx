@@ -15,6 +15,12 @@ interface Sticker {
     bottom?: string;
     left?: string;
   };
+  anchorSm?: {
+    top?: string;
+    right?: string;
+    bottom?: string;
+    left?: string;
+  };
   scrollVector: { x: number; y: number };
   hideBelowSm?: boolean;
   entranceDelay: number;
@@ -24,25 +30,27 @@ const stickers: Sticker[] = [
   {
     src: "/images/pastilla-2.png",
     size: 92,
-    sizeSm: 72,
+    sizeSm: 80,
     parallaxAmp: 10,
     orbitKeyframe: "sticker-orbit-c",
     orbitDuration: 12,
     anchor: { top: "clamp(180px, 30vh, 300px)", left: "calc(64% + 30px)" },
+    anchorSm: { top: "clamp(100px, 18vh, 160px)", left: "6%" },
     scrollVector: { x: -220, y: -140 },
-    hideBelowSm: true,
+    hideBelowSm: false,
     entranceDelay: 720,
   },
   {
     src: "/images/pastilla-3.png",
     size: 84,
-    sizeSm: 64,
+    sizeSm: 72,
     parallaxAmp: 10,
     orbitKeyframe: "sticker-orbit-a",
     orbitDuration: 11,
     anchor: { top: "clamp(72px, 14vh, 128px)", right: "calc(clamp(24px, 6vw, 96px) - 30px)" },
+    anchorSm: { top: "clamp(60px, 12vh, 110px)", right: "4%" },
     scrollVector: { x: 180, y: -180 },
-    hideBelowSm: true,
+    hideBelowSm: false,
     entranceDelay: 800,
   },
   {
@@ -53,6 +61,7 @@ const stickers: Sticker[] = [
     orbitKeyframe: "sticker-orbit-b",
     orbitDuration: 13,
     anchor: { top: "clamp(220px, 38vh, 360px)", right: "calc(clamp(16px, 3vw, 48px) - 30px)" },
+    anchorSm: { top: "clamp(180px, 32vh, 260px)", right: "3%" },
     scrollVector: { x: 240, y: 120 },
     hideBelowSm: false,
     entranceDelay: 920,
@@ -130,11 +139,13 @@ export function FloatingStickers() {
         if (isSmall && s.hideBelowSm) return null;
 
         const size = isSmall ? s.sizeSm : s.size;
+        const currentAnchor = isSmall && s.anchorSm ? s.anchorSm : s.anchor;
         const px = prefersReducedMotion ? 0 : (mouse.x - 0.5) * (i % 2 === 0 ? s.parallaxAmp : -s.parallaxAmp);
         const py = prefersReducedMotion ? 0 : (mouse.y - 0.5) * (i % 2 === 0 ? -s.parallaxAmp : s.parallaxAmp);
-        const scrollX = s.scrollVector.x * scrollProgress;
-        const scrollY = s.scrollVector.y * scrollProgress;
-        const scrollBlur = scrollProgress * 14;
+        const scrollScale = isSmall ? 0.3 : 1;
+        const scrollX = s.scrollVector.x * scrollProgress * scrollScale;
+        const scrollY = s.scrollVector.y * scrollProgress * scrollScale;
+        const scrollBlur = scrollProgress * (isSmall ? 6 : 14);
         const scrollOpacity = 1 - scrollProgress;
 
         const scale = entered ? 1 : 0.72;
@@ -149,7 +160,7 @@ export function FloatingStickers() {
             className="sticker-hover"
             style={{
               position: "absolute",
-              ...s.anchor,
+              ...currentAnchor,
               width: size,
               height: size,
               opacity,

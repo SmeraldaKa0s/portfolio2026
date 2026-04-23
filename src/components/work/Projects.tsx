@@ -38,7 +38,7 @@ export async function Projects({ range, exclude }: ProjectsProps) {
 
   return (
     <Column fillWidth gap="xl" marginBottom="40">
-      <h2 style={{ fontSize: "72px", lineHeight: 1.1, margin: 0, letterSpacing: "-0.02em" }}>
+      <h2 style={{ fontSize: "clamp(40px, 8vw, 72px)", lineHeight: 1.1, margin: 0, letterSpacing: "-0.02em" }}>
         <span
           style={{
             fontFamily: "var(--font-heading)",
