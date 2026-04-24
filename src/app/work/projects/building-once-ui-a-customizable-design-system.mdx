@@ -58,7 +58,7 @@ Además, R1 no habilita entrega parcial. Todo o nada. Si la entrega no se comple
 
 **Ideación con cuatro perfiles de usuario más el equipo de desarrollo de Pickit:** Seller, Operador de Punto, Picker, Colaborador Interno de CX, y los programadores que iban a implementar los cambios. Meter a developers en la etapa de ideación fue clave: varias soluciones que parecían limpias desde UX tenían costos técnicos altos, y otras que parecían complicadas eran triviales de implementar. De esa instancia salió, por ejemplo, tratar a las transacciones multi-bulto como transacciones PRO para reusar el flujo de priorización del ruteador en vez de construir uno nuevo.
 
-## Diseño de aplicativos
+## Diseño de app
 
 ### Pickers app
 
@@ -78,7 +78,7 @@ Rediseñé dos momentos críticos:
 - **Etiqueta.** Agregué un contador "bulto X de Y" visible en cada impresión. Cambio chico de layout, impacto directo en la operación: el operador deja de depender de la pantalla para saber si imprimió todo, la información vive en el papel que tiene en la mano.
 - **Flujo de despacho.** El botón de confirmar queda deshabilitado hasta que el operador escanea los seriales completos de la transacción. Esto resuelve la pantalla congelada del problema original y previene despachos incompletos que después se convertirían en tickets de CX.
 
-## Qué dejé afuera del R1 y por qué
+## Qué dejé afuera del R1
 
 - **Entrega parcial.** Abre una cadena de decisiones (qué se factura, qué vuelve, cómo se reprograma lo faltante) que no podíamos resolver a tiempo para este release.
 - **Ítems no serializados.** R1 exige serialización completa para trackear cada bulto. Soportar ítems sin serial duplica las validaciones.

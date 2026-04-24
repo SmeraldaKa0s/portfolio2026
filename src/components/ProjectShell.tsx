@@ -3,6 +3,13 @@ import {
   Heading,
   Media,
 } from "@once-ui-system/core";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 interface ProjectShellProps {
   title: string;
@@ -21,7 +28,7 @@ export function ProjectShell({
   return (
     <Column as="section" maxWidth="m" horizontal="center" gap="l" marginTop="xl">
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
-        <Heading variant="display-strong-m">{title}</Heading>
+        <Heading variant="display-strong-m" className={playfair.className}>{title}</Heading>
       </Column>
       {cover && (
         <Media
